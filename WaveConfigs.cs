@@ -9,17 +9,23 @@ using System.Threading.Tasks;
 
 namespace WaveOS
 {
-    internal static class WaveConfigs
+    internal class WaveConfigs
     {
 
         public static CosmosVFS WaFs = new();
         public static Dictionary<string, Processes> proc = new();
 
-        public static Canvas display;
+        //public static Canvas display;
+
         [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_background.bmp")] public static byte[] rawWaveBg;
-        public static Image waveBg = new Bitmap(WaveConfigs.rawWaveBg);
+        public static Bitmap waveBg = new Bitmap(WaveConfigs.rawWaveBg);
         [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_Cursor.bmp")] public static byte[] rawWaveCursor;
-        public static Image waveCursor = new Bitmap(rawWaveCursor);
+        public static Bitmap waveCursor = new Bitmap(rawWaveCursor);
+        [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_background_720.bmp")] public static byte[] rawWaveBg_720;
+        public static Bitmap waveBg_720 = new Bitmap(WaveConfigs.rawWaveBg_720);
+
+        public const int displayW = 640;
+        public const int displayH = 480;
 
         public class Processes
         {

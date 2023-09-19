@@ -25,17 +25,21 @@
         <VMWareEdition>Player</VMWareEdition>
         <IsPublishable>False</IsPublishable>
         <Timeout>0</Timeout>
+        <CompileVBEMultiboot>True</CompileVBEMultiboot>
+        <VBEResolution>640x480x32</VBEResolution>
     </PropertyGroup>
 
     <ItemGroup>
       <None Remove="Resources\WaveOS.bmp" />
       <None Remove="Resources\WaveOS_background.bmp" />
+      <None Remove="Resources\WaveOS_background_720.bmp" />
       <None Remove="Resources\WaveOS_Cursor.bmp" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Include="Resources\WaveOS.bmp" />
       <EmbeddedResource Include="Resources\WaveOS_background.bmp" />
+      <EmbeddedResource Include="Resources\WaveOS_background_720.bmp" />
       <EmbeddedResource Include="Resources\WaveOS_Cursor.bmp" />
     </ItemGroup>
 

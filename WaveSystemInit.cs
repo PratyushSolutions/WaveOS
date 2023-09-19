@@ -21,19 +21,15 @@ namespace WaveOS
             WaveConfigs.proc.Add("WaveSystem", waveInit);
 
 
-            Canvas boot = FullScreenCanvas.GetFullScreenCanvas(new Mode(640, 480, ColorDepth.ColorDepth32));
+            //Canvas boot = FullScreenCanvas.GetFullScreenCanvas(new Mode(640, 480, ColorDepth.ColorDepth32));
+
+            /*VBECanvas boot = new();
             boot.Clear();
-            var cY = 480 / 2 - 100;
-            while (cY != 480 / 2)
-            {
-                Cosmos.System.MouseManager.ScreenWidth = 640;
-                Cosmos.System.MouseManager.ScreenHeight = 480;
-                boot.Clear(Color.Black);
-                boot.DrawImageAlpha(new Bitmap(waveLogo), 640 / 4, 480 / 2);
-                cY++;
-                boot.Display();
-            }
-            boot.Disable();
+            boot.Clear(Color.Black);
+            boot.DrawImageAlpha(new Bitmap(waveLogo), 640 / 4, 480 / 2);
+            boot.Display();
+            Thread.Sleep(3000);
+            boot.Disable();:*/
         }
     }
 }

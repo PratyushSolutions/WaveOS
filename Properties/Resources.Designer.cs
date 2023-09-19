@@ -83,6 +83,16 @@ namespace WaveOS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] WaveOS_background_720 {
+            get {
+                object obj = ResourceManager.GetObject("WaveOS_background_720", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] WaveOS_Cursor {
             get {
                 object obj = ResourceManager.GetObject("WaveOS_Cursor", resourceCulture);

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WaveOS.WinManager;
 
 namespace WaveOS
 {
@@ -26,6 +27,8 @@ namespace WaveOS
 
         public const int displayW = 640;
         public const int displayH = 480;
+
+        public static winmgr WindowMgr;
 
         public class Processes
         {

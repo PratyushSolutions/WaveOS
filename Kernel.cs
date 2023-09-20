@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using Sys = Cosmos.System;
 using Cosmos.Core.Memory;
+using WaveOS.WinManager;
+using System;
 
 namespace WaveOS
 {
@@ -20,6 +22,8 @@ namespace WaveOS
             //WaveConfigs.display = FullScreenCanvas.GetFullScreenCanvas(new Mode(640, 480, ColorDepth.ColorDepth32));
             Cosmos.System.MouseManager.ScreenWidth = 640;
             Cosmos.System.MouseManager.ScreenHeight = 480;
+            WaveConfigs.WindowMgr = new();
+            
         }
         private int frameCounter = 0;
         
@@ -31,18 +35,45 @@ namespace WaveOS
         private int prevX = 0;
         private int prevY = 0;
 
+        //fps shit
+        public static int FPS = 0;
+
+        public static int LastS = -1;
+        public static int Ticken = 0;
+
+        public static void Update()
+        {
+            if (LastS == -1)
+            {
+                LastS = DateTime.UtcNow.Second;
+            }
+            if (DateTime.UtcNow.Second - LastS != 0)
+            {
+                if (DateTime.UtcNow.Second > LastS)
+                {
+                    FPS = Ticken / (DateTime.UtcNow.Second - LastS);
+                }
+                LastS = DateTime.UtcNow.Second;
+                Ticken = 0;
+            }
+            Ticken++;
+        }
+
         protected override void Run()
         {
-            //if (updateBg)
-            //{
-                ImprovedVBE.DrawImageAlpha(WaveConfigs.waveBg, 1, 1);
-            //    updateBg = false;
-            //}
+            Update();
+            //background
+            ImprovedVBE.DrawImageAlpha(WaveConfigs.waveBg, 1, 1);
 
-            /*if (prevX != Sys.MouseManager.X || prevY != Sys.MouseManager.Y || (prevX != Sys.MouseManager.X && prevY != Sys.MouseManager.Y))
-            {
-                updateBg = true;
-            }*/
+            //winmgr
+            WaveConfigs.WindowMgr.add(40, 45, 70, 100);
+            WaveConfigs.WindowMgr.update();
+
+            //fps counter
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(50, 50, 50), 0, 0, WaveConfigs.displayW - 1, 25);
+            ImprovedVBE._DrawACSIIString("FPS: " + FPS.ToString(), 10, 10, ImprovedVBE.colourToNumber(255, 255, 255));
+
+            //cursor
             if (Sys.MouseManager.X < 0)
             {
                 Sys.MouseManager.X = 0;
@@ -62,12 +93,14 @@ namespace WaveOS
             //prevX = (int)Sys.MouseManager.X;
             //prevY = (int)Sys.MouseManager.Y;
 
+            //random useless bullshit
             frameCounter++;
             if (frameCounter == 40)
             {
                 frameCounter = 0;
             }
 
+            //rendering
             ImprovedVBE.display(display);
             display.Display();
             Heap.Collect();

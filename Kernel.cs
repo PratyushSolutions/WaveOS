@@ -43,7 +43,21 @@ namespace WaveOS
             {
                 updateBg = true;
             }*/
-
+            if (Sys.MouseManager.X < 0)
+            {
+                Sys.MouseManager.X = 0;
+            } else if (Sys.MouseManager.X + WaveConfigs.waveCursor.Width > WaveConfigs.displayW)
+            {
+                Sys.MouseManager.X = WaveConfigs.displayW - WaveConfigs.waveCursor.Width;
+            }
+            if (Sys.MouseManager.Y < 0)
+            {
+                Sys.MouseManager.Y = 0;
+            }
+            else if (Sys.MouseManager.Y + WaveConfigs.waveCursor.Height > WaveConfigs.displayH)
+            {
+                Sys.MouseManager.Y = WaveConfigs.displayH - WaveConfigs.waveCursor.Height;
+            }
             ImprovedVBE.DrawImageAlpha(WaveConfigs.waveCursor, (int)Sys.MouseManager.X, (int)Sys.MouseManager.Y);
             //prevX = (int)Sys.MouseManager.X;
             //prevY = (int)Sys.MouseManager.Y;

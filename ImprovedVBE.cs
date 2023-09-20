@@ -164,12 +164,14 @@ namespace WaveOS
                     {
                         if (_x <= width)
                         {
-                            if (image.RawData[counter] == 0)
+                            Color c = Color.FromArgb(image.RawData[counter]);
+                            if (c.A > 0)
                             {
                                 counter++;
                             }
                             else
                             {
+
                                 cover.RawData[((_y * width) - (width - _x))] = image.RawData[counter];
                                 counter++;
                             }
@@ -191,49 +193,36 @@ namespace WaveOS
         public static void DrawImageAlpha(Image image, int x, int y)
         {
             int counter = 0;
-            int scan_line = 0;
             for (int _y = y; _y < y + image.Height; _y++)
             {
-                int[] line = new int[image.Width];
-
-                Array.Copy(image.RawData, scan_line * image.Width, line, 0, image.Width);
-
-                if (line[0] != 0 || line[^1] != 0)
+                for (int _x = x; _x < x + image.Width; _x++)
                 {
-                    line.CopyTo(cover.RawData, (_y - 1) * width + x);
-                    //TODO: copy just a specific amount of length
-                    counter += (int)image.Width;
-                }
-                else
-                {
-                    for (int _x = x; _x < x + image.Width; _x++)
+                    if (_y <= height - 1)
                     {
-                        if (_y <= height - 1)
+                        if (_x <= width)
                         {
-                            if (_x <= width)
+                            Color c = Color.FromArgb(image.RawData[counter]);
+                            if (c.A == 0)
                             {
-                                if (image.RawData[counter] == 0)
-                                {
-                                    counter++;
-                                }
-                                else
-                                {
-                                    cover.RawData[((_y * width) - (width - _x))] = image.RawData[counter];
-                                    counter++;
-                                }
+                                counter++;
                             }
                             else
                             {
+
+                                cover.RawData[((_y * width) - (width - _x))] = image.RawData[counter];
                                 counter++;
                             }
                         }
                         else
                         {
-                            counter += (int)image.Width;
+                            counter++;
                         }
                     }
+                    else
+                    {
+                        counter += (int)image.Width;
+                    }
                 }
-                scan_line++;
             }
         }
 

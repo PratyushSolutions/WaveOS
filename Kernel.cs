@@ -10,10 +10,9 @@ namespace WaveOS
 {
     public class Kernel : Sys.Kernel
     {
-        public VBECanvas display = new(new(640, 480, ColorDepth.ColorDepth32));
+        public VBECanvas display = new(new Mode(640, 480, ColorDepth.ColorDepth32));
         protected override void BeforeRun()
         {
-
             VFSManager.RegisterVFS(WaveConfigs.WaFs);
             WaveSystemInit waveInit = new WaveSystemInit();
             waveInit.Start();
@@ -21,7 +20,6 @@ namespace WaveOS
             //WaveConfigs.display = FullScreenCanvas.GetFullScreenCanvas(new Mode(640, 480, ColorDepth.ColorDepth32));
             Cosmos.System.MouseManager.ScreenWidth = 640;
             Cosmos.System.MouseManager.ScreenHeight = 480;
-            display = new(new(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
         }
         private int frameCounter = 0;
         
@@ -32,11 +30,12 @@ namespace WaveOS
 
         private int prevX = 0;
         private int prevY = 0;
+
         protected override void Run()
         {
             //if (updateBg)
             //{
-                ImprovedVBE.DrawImageAlpha(WaveConfigs.waveBg, 0, 0);
+                ImprovedVBE.DrawImageAlpha(WaveConfigs.waveBg, 1, 1);
             //    updateBg = false;
             //}
 
@@ -44,7 +43,7 @@ namespace WaveOS
             {
                 updateBg = true;
             }*/
-            
+
             ImprovedVBE.DrawImageAlpha(WaveConfigs.waveCursor, (int)Sys.MouseManager.X, (int)Sys.MouseManager.Y);
             //prevX = (int)Sys.MouseManager.X;
             //prevY = (int)Sys.MouseManager.Y;
@@ -52,12 +51,12 @@ namespace WaveOS
             frameCounter++;
             if (frameCounter == 40)
             {
-                Heap.Collect();
                 frameCounter = 0;
             }
 
             ImprovedVBE.display(display);
             display.Display();
+            Heap.Collect();
         }
     }
 }

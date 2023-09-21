@@ -62,6 +62,10 @@ namespace WaveOS
         protected override void Run()
         {
             Update();
+            if (FPS > 5)
+            {
+                Heap.Collect();
+            }
             //background
             ImprovedVBE.DrawImageAlpha(WaveConfigs.waveBg, 1, 1);
 

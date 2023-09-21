@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WaveOS.SystemMenus;
 using WaveOS.WinManager;
 
 namespace WaveOS
@@ -29,6 +30,7 @@ namespace WaveOS
         public const int displayH = 480;
 
         public static winmgr WindowMgr;
+        public static topmenu UpperMenu;
 
         public class Processes
         {

@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace WaveOS.WinManager
 {
+    public enum WINDOWTYPE
+    {
+        Normal, //(This means that it draws a titlebar and can be only moved via a titlebar)
+        FullyDraggable //(This means that it does not draw a titlebar and can be moved by dragging the entire window)
+    }
     public class winmgr
     {
         public List<window> winList = new();
@@ -13,12 +18,13 @@ namespace WaveOS.WinManager
             //init code
         }
 
-        public void add(int x, int y, int w, int h)
+        public void add(int x, int y, int w, int h, WINDOWTYPE type = WINDOWTYPE.Normal)
         {
             var tempWin = new window();
             tempWin.x = x; tempWin.y = y;
             tempWin.width = w; tempWin.height = h;
             tempWin.run = true;
+            tempWin.wndType = type;
             winList.Add(tempWin);
         }
 

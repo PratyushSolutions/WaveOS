@@ -23,7 +23,9 @@ namespace WaveOS
             Cosmos.System.MouseManager.ScreenWidth = 640;
             Cosmos.System.MouseManager.ScreenHeight = 480;
             WaveConfigs.WindowMgr = new();
-            
+            WaveConfigs.WindowMgr.add(40, 45, 270, 330);
+            WaveConfigs.UpperMenu = new();
+            WaveConfigs.UpperMenu.init();
         }
         private int frameCounter = 0;
         
@@ -62,20 +64,15 @@ namespace WaveOS
         protected override void Run()
         {
             Update();
-            if (FPS > 5)
+            if (FPS < 15)
             {
                 Heap.Collect();
             }
-            //background
-            ImprovedVBE.DrawImageAlpha(WaveConfigs.waveBg, 1, 1);
-
             //winmgr
-            WaveConfigs.WindowMgr.add(40, 45, 70, 100);
             WaveConfigs.WindowMgr.update();
 
-            //fps counter
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(50, 50, 50), 0, 0, WaveConfigs.displayW - 1, 25);
-            ImprovedVBE._DrawACSIIString("FPS: " + FPS.ToString(), 10, 10, ImprovedVBE.colourToNumber(255, 255, 255));
+            //menu show
+            WaveConfigs.UpperMenu.show(); //top menu with fps counter
 
             //cursor
             if (Sys.MouseManager.X < 0)

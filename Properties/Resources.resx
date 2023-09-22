@@ -130,4 +130,7 @@
   <data name="WaveOS_Cursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WaveOS_Cursor.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="WaveOS_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WaveOS_icon.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

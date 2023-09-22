@@ -99,5 +99,15 @@ namespace WaveOS.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] WaveOS_icon {
+            get {
+                object obj = ResourceManager.GetObject("WaveOS_icon", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

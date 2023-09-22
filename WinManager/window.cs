@@ -18,10 +18,14 @@ namespace WaveOS.WinManager
         public bool showed = false;
         public bool moving = false;
         public bool focussed = false;
+        public Action drawing;
+        public string title;
 
-        public window()
+        public window(Action ControlsDraw, string title)
         {
             showed = true;
+            drawing = ControlsDraw;
+            this.title = title;
         }
 
         public void render()
@@ -50,6 +54,8 @@ namespace WaveOS.WinManager
             if (wndType == WINDOWTYPE.Normal)
             {
                 ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(11,11,11), x, y, width, 20);
+                ImprovedVBE._DrawACSIIString(title, x + 3, y + 3, ImprovedVBE.colourToNumber(255, 255, 255));
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(230, 53, 53), x + width - 15, y + 3, 13, 14);
             }
             if (moving && MouseManager.MouseState == MouseState.Left && MouseManager.X > 0 && MouseManager.Y > 25 && focussed)
             {
@@ -62,7 +68,7 @@ namespace WaveOS.WinManager
                 moving = false;
                 WaveConfigs.WindowMgr.activeWindowDragging = false;
             }
-            if ((MouseManager.X > x && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + 20 && MouseManager.MouseState == MouseState.Left)
+            if ((MouseManager.X > x && MouseManager.X < x + width - 15 && MouseManager.Y > y && MouseManager.Y < y + 20 && MouseManager.MouseState == MouseState.Left)
                 && wndType == WINDOWTYPE.Normal && focussed)
             {
                 moving = true;                
@@ -81,6 +87,13 @@ namespace WaveOS.WinManager
             {
                 WaveConfigs.WindowMgr.moveWindowToFront(this);
             }
+
+            drawControls();
+        }
+
+        public void drawControls()
+        {
+            drawing();
         }
     }
 }

@@ -34,6 +34,7 @@
       <None Remove="Resources\WaveOS_background.bmp" />
       <None Remove="Resources\WaveOS_background_720.bmp" />
       <None Remove="Resources\WaveOS_Cursor.bmp" />
+      <None Remove="Resources\WaveOS_icon.bmp" />
     </ItemGroup>
 
     <ItemGroup>
@@ -41,6 +42,7 @@
       <EmbeddedResource Include="Resources\WaveOS_background.bmp" />
       <EmbeddedResource Include="Resources\WaveOS_background_720.bmp" />
       <EmbeddedResource Include="Resources\WaveOS_Cursor.bmp" />
+      <EmbeddedResource Include="Resources\WaveOS_icon.bmp" />
     </ItemGroup>
 
     <ItemGroup>

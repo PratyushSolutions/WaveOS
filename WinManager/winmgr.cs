@@ -22,9 +22,9 @@ namespace WaveOS.WinManager
             //init code
         }
 
-        public void add(int x, int y, int w, int h, WINDOWTYPE type = WINDOWTYPE.Normal)
+        public void add(int x, int y, int w, int h, string title, Action drawControls, WINDOWTYPE type = WINDOWTYPE.Normal)
         {
-            var tempWin = new window();
+            var tempWin = new window(drawControls, title);
             tempWin.x = x; tempWin.y = y;
             tempWin.width = w; tempWin.height = h;
             tempWin.showed = true;

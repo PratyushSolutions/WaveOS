@@ -23,8 +23,9 @@ namespace WaveOS
             Cosmos.System.MouseManager.ScreenWidth = WaveConfigs.displayW;
             Cosmos.System.MouseManager.ScreenHeight = WaveConfigs.displayH;
             WaveConfigs.WindowMgr = new();
-            WaveConfigs.WindowMgr.add(40, 45, 270, 330);
-            WaveConfigs.WindowMgr.add(70, 95, 290, 380, WINDOWTYPE.FullyDraggable);
+
+            HelpWindow newHelp = new();
+
             WaveConfigs.UpperMenu = new();
             WaveConfigs.UpperMenu.init();
         }

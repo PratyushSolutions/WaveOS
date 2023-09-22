@@ -12,7 +12,7 @@ namespace WaveOS
 {
     public class Kernel : Sys.Kernel
     {
-        public VBECanvas display = new(new Mode(640, 480, ColorDepth.ColorDepth32));
+        public VBECanvas display = new(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
         protected override void BeforeRun()
         {
             VFSManager.RegisterVFS(WaveConfigs.WaFs);
@@ -20,10 +20,11 @@ namespace WaveOS
             waveInit.Start();
             
             //WaveConfigs.display = FullScreenCanvas.GetFullScreenCanvas(new Mode(640, 480, ColorDepth.ColorDepth32));
-            Cosmos.System.MouseManager.ScreenWidth = 640;
-            Cosmos.System.MouseManager.ScreenHeight = 480;
+            Cosmos.System.MouseManager.ScreenWidth = WaveConfigs.displayW;
+            Cosmos.System.MouseManager.ScreenHeight = WaveConfigs.displayH;
             WaveConfigs.WindowMgr = new();
             WaveConfigs.WindowMgr.add(40, 45, 270, 330);
+            WaveConfigs.WindowMgr.add(70, 95, 290, 380, WINDOWTYPE.FullyDraggable);
             WaveConfigs.UpperMenu = new();
             WaveConfigs.UpperMenu.init();
         }

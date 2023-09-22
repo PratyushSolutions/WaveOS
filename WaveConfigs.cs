@@ -26,8 +26,8 @@ namespace WaveOS
         [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_background_720.bmp")] public static byte[] rawWaveBg_720;
         public static Bitmap waveBg_720 = new Bitmap(WaveConfigs.rawWaveBg_720);
 
-        public const int displayW = 640;
-        public const int displayH = 480;
+        public const int displayW = 1280;
+        public const int displayH = 720;
 
         public static winmgr WindowMgr;
         public static topmenu UpperMenu;

@@ -18,7 +18,7 @@ namespace WaveOS
 {
     public class ImprovedVBE
     {
-        [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_background.bmp")] public static byte[] VBECanvas;
+        [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_background_720.bmp")] public static byte[] VBECanvas;
 
         //These are black images matching the size exacly the resolution
         public static Bitmap cover = new Bitmap(VBECanvas);//The base canvas
@@ -50,32 +50,24 @@ namespace WaveOS
 
         public static void DrawFilledRectangle(int color, int X, int Y, int Width, int Height)
         {
-            int[] line = new int[Width];
-            Array.Fill(line, color);
-
-            for (int i = Y - 1; i < Y + Height - 1; i++)
+            if (X <= width)
             {
-                Array.Copy(line, 0, cover.RawData, (i * width) + X, line.Length);
-            }
-            /*
-            for (int j = Y; j < Y + Height; j++)
-            {
-                for (int i = X; i < X + Width; i++)
+                int[] line = new int[Width];
+                if (X < 0)
                 {
-                    try
-                    {
-                        if(j < height)
-                        {
-                            cover.RawData[(j * width) - (width - i)] = color;
-                        }
-                    }
-                    catch
-                    {
+                    line = new int[Width + X];
+                }
+                else if (X + Width > width)
+                {
+                    line = new int[Width - (X + Width - width)];
+                }
+                Array.Fill(line, color);
 
-                    }
+                for (int i = Y - 1; i < Y + Height - 1; i++)
+                {
+                    Array.Copy(line, 0, cover.RawData, (i * width) + X, line.Length);
                 }
             }
-            */
         }
 
         //Slower but can be improved with Array.Copy();

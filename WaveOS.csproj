@@ -26,7 +26,7 @@
         <IsPublishable>False</IsPublishable>
         <Timeout>0</Timeout>
         <CompileVBEMultiboot>True</CompileVBEMultiboot>
-        <VBEResolution>640x480x32</VBEResolution>
+        <VBEResolution>1280x720x32</VBEResolution>
     </PropertyGroup>
 
     <ItemGroup>

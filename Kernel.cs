@@ -9,6 +9,7 @@ using WaveOS.WinManager;
 using System;
 using Cosmos.System;
 using System.Threading;
+using WaveOS.Apps;
 
 namespace WaveOS
 {

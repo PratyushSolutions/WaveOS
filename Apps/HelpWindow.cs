@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 using WaveOS.GraphicsWidgets;
 using WaveOS.WinManager;
 
-namespace WaveOS
+namespace WaveOS.Apps
 {
     internal class HelpWindow
     {
         public window newWin;
         public HelpWindow()
         {
-            newWin = new window(Controls, "Help");
-            newWin.x = WaveConfigs.defaultWindowPositionX - 150;
-            newWin.y = WaveConfigs.defaultWindowPositionY - 100;
+            newWin = new window(Controls, "About");
+            newWin.x = WaveConfigs.defaultWindowPositionX;
+            newWin.y = WaveConfigs.defaultWindowPositionY;
             newWin.width = 150;
             newWin.height = 100;
             newWin.wndType = WINDOWTYPE.Normal;
@@ -25,7 +25,7 @@ namespace WaveOS
 
         public void Controls()
         {
-            Button btnOk = new(newWin, 10, 45, 90, 30, "Ok", 11,11,11);
+            Button btnOk = new(newWin, 10, 50, 135, 25, "Ok", 11,11,11);
             Label lblInfo = new(newWin, 10, 15, WaveConfigs.osNameVersion, 50, 50, 50);
 
             lblInfo.draw();

@@ -11,7 +11,6 @@ namespace WaveOS.SystemMenus
     internal class topmenu
     {
         public int menuHeight = 25;
-
         public int menuR = 50;
         public int menuG = 50;
         public int menuB = 50;

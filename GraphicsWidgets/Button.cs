@@ -58,9 +58,9 @@ namespace WaveOS.GraphicsWidgets
                     onClicked();
                 } else
                 {
-                    tempR = 10;
-                    tempG = 10;
-                    tempB = 10;
+                    tempR = 130;
+                    tempG = 130;
+                    tempB = 130;
                 }
             } else
             {

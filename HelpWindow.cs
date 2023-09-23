@@ -26,7 +26,7 @@ namespace WaveOS
         public void Controls()
         {
             Button btnOk = new(newWin, 10, 45, 90, 30, "Ok", 11,11,11);
-            Label lblInfo = new(newWin, 10, 15, "WaveOS v0.1", 50, 50, 50);
+            Label lblInfo = new(newWin, 10, 15, WaveConfigs.osNameVersion, 50, 50, 50);
 
             lblInfo.draw();
             btnOk.draw(onClick_buttonOk);

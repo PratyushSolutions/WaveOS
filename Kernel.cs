@@ -7,12 +7,15 @@ using Sys = Cosmos.System;
 using Cosmos.Core.Memory;
 using WaveOS.WinManager;
 using System;
+using Cosmos.System;
+using System.Threading;
 
 namespace WaveOS
 {
     public class Kernel : Sys.Kernel
     {
         public VBECanvas display = new(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
+        public static string currentSignal = "NONE";
         protected override void BeforeRun()
         {
             VFSManager.RegisterVFS(WaveConfigs.WaFs);
@@ -22,6 +25,8 @@ namespace WaveOS
             //WaveConfigs.display = FullScreenCanvas.GetFullScreenCanvas(new Mode(640, 480, ColorDepth.ColorDepth32));
             Cosmos.System.MouseManager.ScreenWidth = WaveConfigs.displayW;
             Cosmos.System.MouseManager.ScreenHeight = WaveConfigs.displayH;
+            MouseManager.X = WaveConfigs.displayW / 2;
+            MouseManager.Y = WaveConfigs.displayH / 2;
             WaveConfigs.WindowMgr = new();
 
             HelpWindow newHelp = new();
@@ -105,8 +110,19 @@ namespace WaveOS
 
             //rendering
             ImprovedVBE.display(display);
+            if (currentSignal == "WAIT5-CLOSE")
+            {
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(10, 10, 10), 0, 0, WaveConfigs.displayW - 2, WaveConfigs.displayH - 2);
+                ImprovedVBE._DrawACSIIString("Shutting down!", 5, 5, ImprovedVBE.colourToNumber(201, 28, 28));
+                ImprovedVBE.display(display);
+                display.Display();
+                Thread.Sleep(1000);
+                Power.Shutdown();
+            }
             display.Display();
             Heap.Collect();
         }
+
+        public static void sendSignalToKernel(string signal) => currentSignal = signal;
     }
 }

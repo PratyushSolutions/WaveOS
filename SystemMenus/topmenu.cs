@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WaveOS.SystemMenus
@@ -34,6 +35,13 @@ namespace WaveOS.SystemMenus
         public int currentColor_WaveOSMenu_Shutdown_BackR = 130;
         public int currentColor_WaveOSMenu_Shutdown_BackG = 130;
         public int currentColor_WaveOSMenu_Shutdown_BackB = 130;
+
+        public int currentColor_WaveOSMenu_About_ForeR = 255;
+        public int currentColor_WaveOSMenu_About_ForeG = 255;
+        public int currentColor_WaveOSMenu_About_ForeB = 255;
+        public int currentColor_WaveOSMenu_About_BackR = 130;
+        public int currentColor_WaveOSMenu_About_BackG = 130;
+        public int currentColor_WaveOSMenu_About_BackB = 130;
 
         public bool toggledMenu_WaveOSMenu = false;
 
@@ -79,7 +87,11 @@ namespace WaveOS.SystemMenus
                 {
                     if (MouseManager.MouseState == MouseState.Left)
                     {
-                        Power.Shutdown();
+                        toggledMenu_WaveOSMenu = false;
+                        ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(10, 10, 10), 0, 0, WaveConfigs.displayW - 2, WaveConfigs.displayH - 2);
+                        ImprovedVBE._DrawACSIIString("Shutting down!", 5, 5, ImprovedVBE.colourToNumber(201, 28, 28));
+                        Kernel.sendSignalToKernel("WAIT5-CLOSE");
+                        return;
                     } else
                     {
                         currentColor_WaveOSMenu_Shutdown_ForeR = 0;
@@ -101,6 +113,38 @@ namespace WaveOS.SystemMenus
                     currentColor_WaveOSMenu_Shutdown_BackB = 130;
                 }
 
+                //--WaveOS permanent menu --> about button
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(currentColor_WaveOSMenu_About_BackR, currentColor_WaveOSMenu_About_BackG, currentColor_WaveOSMenu_About_BackB), 5, menuHeight + 2 + 20 + 2, 100 - 10, 20);
+                ImprovedVBE._DrawACSIIString("About", 7, menuHeight + 5 + 20 + 2, ImprovedVBE.colourToNumber(currentColor_WaveOSMenu_About_ForeR, currentColor_WaveOSMenu_About_ForeG, currentColor_WaveOSMenu_About_ForeB));
+
+                if (MouseManager.X > 0 && MouseManager.X < 100 && MouseManager.Y > menuHeight + 20 && MouseManager.Y < menuHeight + 20 + 2 + 20)
+                {
+                    if (MouseManager.MouseState == MouseState.Left)
+                    {
+                        HelpWindow newAbout = new();
+                        toggledMenu_WaveOSMenu = false;
+                    }
+                    else
+                    {
+                        currentColor_WaveOSMenu_About_ForeR = 0;
+                        currentColor_WaveOSMenu_About_ForeG = 0;
+                        currentColor_WaveOSMenu_About_ForeB = 0;
+
+                        currentColor_WaveOSMenu_About_BackR = 190;
+                        currentColor_WaveOSMenu_About_BackG = 190;
+                        currentColor_WaveOSMenu_About_BackB = 190;
+                    }
+                }
+                else
+                {
+                    currentColor_WaveOSMenu_About_ForeR = 255;
+                    currentColor_WaveOSMenu_About_ForeG = 255;
+                    currentColor_WaveOSMenu_About_ForeB = 255;
+
+                    currentColor_WaveOSMenu_About_BackR = 130;
+                    currentColor_WaveOSMenu_About_BackG = 130;
+                    currentColor_WaveOSMenu_About_BackB = 130;
+                }
             }
 
             ImprovedVBE._DrawACSIIString("FPS: " + Kernel.FPS.ToString(), WaveConfigs.displayW - (("FPS: " + Kernel.FPS.ToString()).Length * 10) - 5, 5, ImprovedVBE.colourToNumber(130, 130, 130));

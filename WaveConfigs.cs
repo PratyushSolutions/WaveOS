@@ -32,6 +32,9 @@ namespace WaveOS
         public const int displayH = 720;
         public const int defaultWindowPositionX = displayW / 2;
         public const int defaultWindowPositionY = displayH / 2;
+        public const string osName = "WaveOS";
+        public const string osVersion = "v0.1";
+        public const string osNameVersion = osName + " " + osVersion;
 
         public static winmgr WindowMgr;
         public static topmenu UpperMenu;

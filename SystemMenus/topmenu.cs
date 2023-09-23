@@ -43,6 +43,13 @@ namespace WaveOS.SystemMenus
         public int currentColor_WaveOSMenu_About_BackG = 130;
         public int currentColor_WaveOSMenu_About_BackB = 130;
 
+        public int currentColor_WaveOSMenu_Reboot_ForeR = 255;
+        public int currentColor_WaveOSMenu_Reboot_ForeG = 255;
+        public int currentColor_WaveOSMenu_Reboot_ForeB = 255;
+        public int currentColor_WaveOSMenu_Reboot_BackR = 130;
+        public int currentColor_WaveOSMenu_Reboot_BackG = 130;
+        public int currentColor_WaveOSMenu_Reboot_BackB = 130;
+
         public bool toggledMenu_WaveOSMenu = false;
 
         public void show()
@@ -144,6 +151,39 @@ namespace WaveOS.SystemMenus
                     currentColor_WaveOSMenu_About_BackR = 130;
                     currentColor_WaveOSMenu_About_BackG = 130;
                     currentColor_WaveOSMenu_About_BackB = 130;
+                }
+
+                //--WaveOS permanent menu --> reboot button
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(currentColor_WaveOSMenu_Reboot_BackR, currentColor_WaveOSMenu_Reboot_BackG, currentColor_WaveOSMenu_Reboot_BackB), 5, menuHeight + 2 + 20 + 20 + 2, 100 - 10, 20);
+                ImprovedVBE._DrawACSIIString("Reboot", 7, menuHeight + 5 + 20 + 20 + 2, ImprovedVBE.colourToNumber(currentColor_WaveOSMenu_Reboot_ForeR, currentColor_WaveOSMenu_Reboot_ForeG, currentColor_WaveOSMenu_Reboot_ForeB));
+
+                if (MouseManager.X > 0 && MouseManager.X < 100 && MouseManager.Y > menuHeight + 20 + 20 && MouseManager.Y < menuHeight + 20 + 2 + 20 + 20)
+                {
+                    if (MouseManager.MouseState == MouseState.Left)
+                    {
+                        Kernel.sendSignalToKernel("WAIT5-REBOOT");
+                        return;
+                    }
+                    else
+                    {
+                        currentColor_WaveOSMenu_Reboot_ForeR = 0;
+                        currentColor_WaveOSMenu_Reboot_ForeG = 0;
+                        currentColor_WaveOSMenu_Reboot_ForeB = 0;
+
+                        currentColor_WaveOSMenu_Reboot_BackR = 190;
+                        currentColor_WaveOSMenu_Reboot_BackG = 190;
+                        currentColor_WaveOSMenu_Reboot_BackB = 190;
+                    }
+                }
+                else
+                {
+                    currentColor_WaveOSMenu_Reboot_ForeR = 255;
+                    currentColor_WaveOSMenu_Reboot_ForeG = 255;
+                    currentColor_WaveOSMenu_Reboot_ForeB = 255;
+
+                    currentColor_WaveOSMenu_Reboot_BackR = 130;
+                    currentColor_WaveOSMenu_Reboot_BackG = 130;
+                    currentColor_WaveOSMenu_Reboot_BackB = 130;
                 }
             }
 

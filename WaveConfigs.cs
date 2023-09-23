@@ -30,6 +30,8 @@ namespace WaveOS
 
         public const int displayW = 1280;
         public const int displayH = 720;
+        public const int defaultWindowPositionX = displayW / 2;
+        public const int defaultWindowPositionY = displayH / 2;
 
         public static winmgr WindowMgr;
         public static topmenu UpperMenu;

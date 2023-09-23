@@ -15,7 +15,7 @@ namespace WaveOS.SystemMenus
 
         public void Update()
         {
-
+            
         }
     }
 }

@@ -14,8 +14,8 @@ namespace WaveOS
         public HelpWindow()
         {
             newWin = new window(Controls, "Help");
-            newWin.x = 50;
-            newWin.y = 50;
+            newWin.x = WaveConfigs.defaultWindowPositionX - 150;
+            newWin.y = WaveConfigs.defaultWindowPositionY - 100;
             newWin.width = 150;
             newWin.height = 100;
             newWin.wndType = WINDOWTYPE.Normal;

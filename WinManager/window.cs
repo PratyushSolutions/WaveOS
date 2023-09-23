@@ -76,6 +76,10 @@ namespace WaveOS.WinManager
                 && wndType == WINDOWTYPE.FullyDraggable && focussed)
             {
                 moving = true;
+            } else if ((MouseManager.X > x + width - 15 && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + 20 && MouseManager.MouseState == MouseState.Left)
+                && wndType == WINDOWTYPE.Normal && focussed)
+            {
+                showed = false;
             }
 
             if (MouseManager.X > x && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + 20 && MouseManager.MouseState == MouseState.Left

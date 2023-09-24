@@ -34,7 +34,7 @@ namespace WaveOS.Apps
 
         public void Controls()
         {
-            Label sample = new(TermWindow, 10, 10, WaveBuffer, 255, 255, 255);
+            Label sample = new(TermWindow, 0, 0, WaveBuffer, 255, 255, 255);
 
             sample.draw();
         }

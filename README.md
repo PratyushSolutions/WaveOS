@@ -1,4 +1,6 @@
-# WaveOS
+![WaveOS](/GithubResources/WaveLight.png#gh-dark-mode-only)
+![WaveOS](/GithubResources/WaveDark.png#gh-light-mode-only)
+<hr>
 WaveOS is a grpahically advanced OS that has taken the most minimalistic UI approach, best for lightweight use.
 
 ## Features:

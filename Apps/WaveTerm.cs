@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WaveOS.GraphicsWidgets;
 using WaveOS.WinManager;
+using WaveOS.Wave_zSH;
 
 namespace WaveOS.Apps
 {
@@ -16,6 +17,8 @@ namespace WaveOS.Apps
         public window TermWindow;
         [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveTerm.bmp")] public static byte[] waveTermIcon;
         public static Bitmap waveTermLogo = new(waveTermIcon);
+        public static string WaveBuffer = "# ";
+        public static string currentCommand = "";
 
         public WaveTerm()
         {
@@ -31,14 +34,31 @@ namespace WaveOS.Apps
 
         public void Controls()
         {
-            Label sample = new(TermWindow, 10, 10, "Hey!", 255, 255, 255);
+            Label sample = new(TermWindow, 10, 10, WaveBuffer, 255, 255, 255);
 
             sample.draw();
         }
 
         public void KeyHandler()
         {
-
+            if (WaveConfigs.WindowMgr.winList[WaveConfigs.WindowMgr.winList.Count - 1].currentKey.Key != Cosmos.System.ConsoleKeyEx.Backspace ||
+                WaveConfigs.WindowMgr.winList[WaveConfigs.WindowMgr.winList.Count - 1].currentKey.Key != Cosmos.System.ConsoleKeyEx.Enter)
+            {
+                currentCommand += WaveConfigs.WindowMgr.winList[WaveConfigs.WindowMgr.winList.Count - 1].currentKey.KeyChar;
+                WaveBuffer += WaveConfigs.WindowMgr.winList[WaveConfigs.WindowMgr.winList.Count - 1].currentKey.KeyChar;
+            } else
+            {
+                switch (WaveConfigs.WindowMgr.winList[WaveConfigs.WindowMgr.winList.Count - 1].currentKey.Key)
+                {
+                    case Cosmos.System.ConsoleKeyEx.Enter:
+                        WaveBuffer = WSH.handleWSHCommand(currentCommand, WaveBuffer);
+                        currentCommand = "";
+                        ImprovedVBE._DrawACSIIString(WaveBuffer, 50, 50, ImprovedVBE.colourToNumber(255, 255, 255));
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

@@ -24,6 +24,11 @@ namespace WaveOS.WinManager
         public Action? keyhandler = null;
         public KeyEvent currentKey;
         public Bitmap logo;
+        public bool msgBox = false;
+
+        public int bR = 30;
+        public int bG = 31;
+        public int bB = 35;
 
         public window(Action ControlsDraw, string title, Action? keyHandler = null, Bitmap? Logo = null)
         {
@@ -36,6 +41,15 @@ namespace WaveOS.WinManager
 
         public void render()
         {
+            if (msgBox)
+            {
+                bR = 150; bG = 150; bB = 150;
+            }
+            else
+            {
+                bR = 30; bG = 31; bB = 35;
+            }
+
             if (showed)
                 update();
 
@@ -49,14 +63,14 @@ namespace WaveOS.WinManager
 
         public void update()
         {
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + 9, 9);
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + width - 8, y + 9, 9);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + 7, y + 9, 9);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + width - 8, y + 9, 9);
 
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x - 2, y - 2 + 10, width + 2 + 2, height + 2 + 2 + 10);
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(bR, bG, bB), x - 2, y - 2 + 10, width + 2 + 2, height + 2 + 2 + 10);
 
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 20, width - 10, 12);
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 14 + 9, 9);
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + width - 8, y + height + 14 + 9, 9);
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(bR, bG, bB), x + 7, y + height + 20, width - 10, 12);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + 7, y + height + 14 + 9, 9);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + width - 8, y + height + 14 + 9, 9);
 
             if (focussed)
             {
@@ -64,11 +78,11 @@ namespace WaveOS.WinManager
                 //ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(163, 194, 255), x + 7, y + height + 14 + 9, 9);
                 //ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(163, 194, 255), x + width - 8, y + height + 14 + 9, 9);
 
-                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 20 + 5, width - 10, 9);
-                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 14 + 9, 9);
-                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + width - 8, y + height + 14 + 9, 9);
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(bR, bG, bB), x + 7, y + height + 20 + 5, width - 10, 9);
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + 7, y + height + 14 + 9, 9);
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + width - 8, y + height + 14 + 9, 9);
 
-                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x - 2, y - 2 + 10, width + 2 + 2, height + 2 + 2 + 10);
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(bR, bG, bB), x - 2, y - 2 + 10, width + 2 + 2, height + 2 + 2 + 10);
                 //ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(163, 194, 255), x, y + 14, width, height + 14);
             } else
             {
@@ -76,10 +90,10 @@ namespace WaveOS.WinManager
                 //ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(77, 77, 77), x + 7, y + height + 14 + 9, 9);
                 //ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(77, 77, 77), x + width - 8, y + height + 14 + 9, 9);
 
-                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 20 + 5, width - 10, 9);
-                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 14 + 9, 9);
-                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + width - 8, y + height + 14 + 9, 9);
-                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x - 2, y - 2 + 10, width + 2 + 2, height + 2 + 2 + 10);
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(bR, bG, bB), x + 7, y + height + 20 + 5, width - 10, 9);
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + 7, y + height + 14 + 9, 9);
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + width - 8, y + height + 14 + 9, 9);
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(bR, bG, bB), x - 2, y - 2 + 10, width + 2 + 2, height + 2 + 2 + 10);
                 //ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(77, 77, 77), x, y, width, height);
             }
             if (wndType == WINDOWTYPE.Normal)
@@ -114,7 +128,7 @@ namespace WaveOS.WinManager
                 && wndType == WINDOWTYPE.FullyDraggable && focussed)
             {
                 moving = true;
-            } else if ((MouseManager.X > x + width - 15 && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + 20 && MouseManager.MouseState == MouseState.Left)
+            } else if ((MouseManager.X > x + 9 && MouseManager.X < x + 9 + 5 && MouseManager.Y > y + 10 && MouseManager.Y < y + 10 + 5 && MouseManager.MouseState == MouseState.Left)
                 && wndType == WINDOWTYPE.Normal && focussed)
             {
                 showed = false;
@@ -136,7 +150,8 @@ namespace WaveOS.WinManager
         public void sendKey(KeyEvent key)
         {
             currentKey = key;
-            keyhandler();
+            if (keyhandler != null)
+                keyhandler();
         }
 
         public void drawControls()

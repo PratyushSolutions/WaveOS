@@ -1,4 +1,5 @@
 ﻿using Cosmos.System;
+using Cosmos.System.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,12 +21,17 @@ namespace WaveOS.WinManager
         public bool focussed = false;
         public Action drawing;
         public string title;
+        public Action? keyhandler = null;
+        public KeyEvent currentKey;
+        public Bitmap logo;
 
-        public window(Action ControlsDraw, string title)
+        public window(Action ControlsDraw, string title, Action? keyHandler = null, Bitmap? Logo = null)
         {
             showed = true;
             drawing = ControlsDraw;
             this.title = title;
+            this.keyhandler = keyHandler;
+            this.logo = Logo;
         }
 
         public void render()
@@ -43,19 +49,51 @@ namespace WaveOS.WinManager
 
         public void update()
         {
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(11,11,11), x - 2, y - 2, width + 2 + 2, height + 2 + 2);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + 9, 9);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + width - 8, y + 9, 9);
+
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x - 2, y - 2 + 10, width + 2 + 2, height + 2 + 2 + 10);
+
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 20, width - 10, 12);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 14 + 9, 9);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + width - 8, y + height + 14 + 9, 9);
+
             if (focussed)
             {
-                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(163, 194, 255), x, y, width, height);
+                //ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(163, 194, 255), x + 7, y + height + 20 + 5, width - 10, 9);
+                //ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(163, 194, 255), x + 7, y + height + 14 + 9, 9);
+                //ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(163, 194, 255), x + width - 8, y + height + 14 + 9, 9);
+
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 20 + 5, width - 10, 9);
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 14 + 9, 9);
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + width - 8, y + height + 14 + 9, 9);
+
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x - 2, y - 2 + 10, width + 2 + 2, height + 2 + 2 + 10);
+                //ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(163, 194, 255), x, y + 14, width, height + 14);
             } else
             {
-                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(77, 77, 77), x, y, width, height);
+                //ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(77, 77, 77), x + 7, y + height + 20 + 5, width - 10, 9);
+                //ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(77, 77, 77), x + 7, y + height + 14 + 9, 9);
+                //ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(77, 77, 77), x + width - 8, y + height + 14 + 9, 9);
+
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 20 + 5, width - 10, 9);
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + 7, y + height + 14 + 9, 9);
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(30, 31, 35), x + width - 8, y + height + 14 + 9, 9);
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(30, 31, 35), x - 2, y - 2 + 10, width + 2 + 2, height + 2 + 2 + 10);
+                //ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(77, 77, 77), x, y, width, height);
             }
             if (wndType == WINDOWTYPE.Normal)
             {
-                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(11,11,11), x, y, width, 20);
-                ImprovedVBE._DrawACSIIString(title, x + 3, y + 3, ImprovedVBE.colourToNumber(255, 255, 255));
-                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(230, 53, 53), x + width - 15, y + 3, 13, 14);
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(60, 59, 63), x + 7, y + 9, 9);
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(60, 59, 63), x + width - 8, y + 9, 9);
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(60, 59, 63), x + 5, y, width - 10, 20);
+
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(60, 59, 63), x - 2, y + 10, width + 2 + 2, 2 + 10);
+                ImprovedVBE._DrawACSIIString(title, x + ((width / 2) - (title.Length * 4)), y + 5, ImprovedVBE.colourToNumber(255, 255, 255));
+                ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(255, 91, 82), x + 9, y + 10, 5);
+
+                if (logo != null)
+                    ImprovedVBE.DrawImageAlpha(logo, x + ((width / 2) - (title.Length * 4)) - 23, y + 4);
             }
             if (moving && MouseManager.MouseState == MouseState.Left && MouseManager.X > 0 && MouseManager.Y > 25 && focussed)
             {
@@ -93,6 +131,12 @@ namespace WaveOS.WinManager
             }
 
             drawControls();
+        }
+        
+        public void sendKey(KeyEvent key)
+        {
+            currentKey = key;
+            keyhandler();
         }
 
         public void drawControls()

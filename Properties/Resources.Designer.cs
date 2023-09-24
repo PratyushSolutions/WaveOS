@@ -93,6 +93,16 @@ namespace WaveOS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] WaveOS_background_768 {
+            get {
+                object obj = ResourceManager.GetObject("WaveOS_background_768", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] WaveOS_Cursor {
             get {
                 object obj = ResourceManager.GetObject("WaveOS_Cursor", resourceCulture);
@@ -106,6 +116,26 @@ namespace WaveOS.Properties {
         public static byte[] WaveOS_icon {
             get {
                 object obj = ResourceManager.GetObject("WaveOS_icon", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] WaveOS_TopBar {
+            get {
+                object obj = ResourceManager.GetObject("WaveOS_TopBar", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] WaveTerm {
+            get {
+                object obj = ResourceManager.GetObject("WaveTerm", resourceCulture);
                 return ((byte[])(obj));
             }
         }

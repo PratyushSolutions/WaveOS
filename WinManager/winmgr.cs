@@ -34,6 +34,10 @@ namespace WaveOS.WinManager
 
         public void update()
         {
+            if (KeyboardManager.TryReadKey(out var key))
+            {
+                PassKeyToFocussedWindow(key);
+            }
             currentFocussed = winList.Count - 1;
             winList[currentFocussed].focussed = true;
             if (winList.Count < 0)
@@ -56,6 +60,11 @@ namespace WaveOS.WinManager
                 winList.Remove(win);
             }
             winList.Add(win);
+        }
+
+        public void PassKeyToFocussedWindow(KeyEvent key)
+        {
+            winList[winList.Count - 1].sendKey(key);
         }
     }
 }

@@ -19,7 +19,17 @@ namespace WaveOS
         public static string currentSignal = "NONE";
         protected override void BeforeRun()
         {
-            VFSManager.RegisterVFS(WaveConfigs.WaFs);
+            try
+            {
+                if (WaveConfigs.WaFs.Disks.Count > 0)
+                {
+                    VFSManager.RegisterVFS(WaveConfigs.WaFs);
+                }
+            }
+            catch (Exception)
+            {
+                //ImprovedVBE._DrawACSIIString("Didn't make FS!");
+            }
             WaveSystemInit waveInit = new WaveSystemInit();
             waveInit.Start();
             
@@ -30,7 +40,8 @@ namespace WaveOS
             MouseManager.Y = WaveConfigs.displayH / 2;
             WaveConfigs.WindowMgr = new();
 
-            HelpWindow newHelp = new();
+            //HelpWindow newHelp = new();
+            WaveTerm term = new();
 
             WaveConfigs.UpperMenu = new();
             WaveConfigs.UpperMenu.init();
@@ -41,9 +52,6 @@ namespace WaveOS
         /// Modify this to redraw Background on next frame.
         /// </summary>
         public bool updateBg = true;
-
-        private int prevX = 0;
-        private int prevY = 0;
 
         //fps shit
         public static int FPS = 0;
@@ -72,10 +80,6 @@ namespace WaveOS
         protected override void Run()
         {
             Update();
-            if (FPS < 15)
-            {
-                Heap.Collect();
-            }
             //winmgr
             WaveConfigs.WindowMgr.update();
 
@@ -101,13 +105,6 @@ namespace WaveOS
             ImprovedVBE.DrawImageAlpha(WaveConfigs.waveCursor, (int)Sys.MouseManager.X, (int)Sys.MouseManager.Y);
             //prevX = (int)Sys.MouseManager.X;
             //prevY = (int)Sys.MouseManager.Y;
-
-            //random useless bullshit
-            frameCounter++;
-            if (frameCounter == 40)
-            {
-                frameCounter = 0;
-            }
 
             //rendering
             ImprovedVBE.display(display);

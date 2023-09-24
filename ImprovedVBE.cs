@@ -18,7 +18,7 @@ namespace WaveOS
 {
     public class ImprovedVBE
     {
-        [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_background_720.bmp")] public static byte[] VBECanvas;
+        [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_background_768.bmp")] public static byte[] VBECanvas;
 
         //These are black images matching the size exacly the resolution
         public static Bitmap cover = new Bitmap(VBECanvas);//The base canvas
@@ -45,6 +45,40 @@ namespace WaveOS
             if (x >= 0 && x <= width && y >= 0 && y <= height)
             {
                 cover.RawData[y * width + x] = color;
+            }
+        }
+
+        public static void DrawFilledCircle(int color, int x0, int y0, int radius)
+        {
+            int x = radius;
+            int y = 0;
+            int xChange = 1 - (radius << 1);
+            int yChange = 0;
+            int radiusError = 0;
+
+            while (x >= y)
+            {
+                for (int i = x0 - x; i <= x0 + x; i++)
+                {
+
+                    DrawPixelfortext(i, y0 + y, color);
+                    DrawPixelfortext(i, y0 - y, color);
+                }
+                for (int i = x0 - y; i <= x0 + y; i++)
+                {
+                    DrawPixelfortext(i, y0 + x, color);
+                    DrawPixelfortext(i, y0 - x, color);
+                }
+
+                y++;
+                radiusError += yChange;
+                yChange += 2;
+                if ((radiusError << 1) + xChange > 0)
+                {
+                    x--;
+                    radiusError += xChange;
+                    xChange += 2;
+                }
             }
         }
 

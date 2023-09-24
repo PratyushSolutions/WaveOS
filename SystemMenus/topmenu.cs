@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using WaveOS.Apps;
 
 namespace WaveOS.SystemMenus
 {
@@ -78,7 +79,8 @@ namespace WaveOS.SystemMenus
             //global menu
 
             //--WaveOS permanent menu
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(currentColor_WaveOSMenu_BackR, currentColor_WaveOSMenu_BackG, currentColor_WaveOSMenu_BackB), 0, 0, 60, menuHeight);
+            //ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(currentColor_WaveOSMenu_BackR, currentColor_WaveOSMenu_BackG, currentColor_WaveOSMenu_BackB), 0, 0, 60, menuHeight);
+            ImprovedVBE.DrawImageAlpha(WaveConfigs.waveTopBar, 0, 0);
             ImprovedVBE._DrawACSIIString("WaveOS", 7, 5, ImprovedVBE.colourToNumber(currentColor_WaveOSMenu_ForeR, currentColor_WaveOSMenu_ForeG, currentColor_WaveOSMenu_ForeB));
             if (toggledMenu_WaveOSMenu)
             {

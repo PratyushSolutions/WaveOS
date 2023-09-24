@@ -25,11 +25,17 @@ namespace WaveOS
         public static Bitmap waveCursor = new Bitmap(rawWaveCursor);
         [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_background_720.bmp")] public static byte[] rawWaveBg_720;
         public static Bitmap waveBg_720 = new Bitmap(WaveConfigs.rawWaveBg_720);
+        [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_background_768.bmp")] public static byte[] rawWaveBg_768;
+        public static Bitmap waveBg_768 = new Bitmap(WaveConfigs.rawWaveBg_768);
         [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_icon.bmp")] public static byte[] rawWaveIcon;
         public static Bitmap waveIcon = new Bitmap(WaveConfigs.rawWaveIcon);
 
-        public const int displayW = 1280;
-        public const int displayH = 720;
+        [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_TopBar.bmp")] public static byte[] rawWaveTopBar;
+        public static Bitmap waveTopBar = new Bitmap(WaveConfigs.rawWaveTopBar);
+
+        public const int displayW = 1024;
+        public const int displayH = 768;
+
         public const int defaultWindowPositionX = displayW / 2;
         public const int defaultWindowPositionY = displayH / 2;
         public const string osName = "WaveOS";

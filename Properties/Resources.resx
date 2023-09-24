@@ -127,10 +127,19 @@
   <data name="WaveOS_background_720" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WaveOS_background_720.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="WaveOS_background_768" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WaveOS_background_768.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="WaveOS_Cursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WaveOS_Cursor.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="WaveOS_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WaveOS_icon.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="WaveOS_TopBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WaveOS_TopBar.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="WaveTerm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WaveTerm.bmp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -21,12 +21,12 @@ namespace WaveOS.GraphicsWidgets
         public int g;
         public int b;
 
-        public Button(window parentWindow, int x, int y, int width, int height, string text, int colorR, int colorG, int colorB)
+        public Button(window parentWindow, int x, int y, int width, int height, string text, int colorR = 21, int colorG = 101, int colorB = 238)
         {
             this.parent = parentWindow;
             this.x = x;
             this.y = y;
-            this.width = width;
+            this.width = width - height / 2;
             this.height = height;
             this.label = text;
             this.r = colorR;
@@ -47,7 +47,9 @@ namespace WaveOS.GraphicsWidgets
             {
                 y += 21;
             }
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(tempR, tempG, tempB), parent.x + x, parent.y + y, width, height);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(tempR, tempG, tempB), (parent.x + x) + height / 2, (parent.y + y) + height / 2 - 1, height / 2);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(tempR, tempG, tempB), (parent.x + x + width) + height / 2, (parent.y + y) + height / 2 - 1, height / 2);
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(tempR, tempG, tempB), (parent.x + x) + height / 2, parent.y + y, width, height);
             ImprovedVBE._DrawACSIIString(label, parent.x + x + 7, parent.y + y + 7, ImprovedVBE.colourToNumber(255,255,255));
             if (MouseManager.X > parent.x + x && MouseManager.X < parent.x + x + width
                 && MouseManager.Y > parent.y + y && MouseManager.Y < parent.y + y + height
@@ -55,6 +57,7 @@ namespace WaveOS.GraphicsWidgets
             {
                 if (MouseManager.MouseState == MouseState.Left)
                 {
+                    MouseManager.MouseState = MouseState.None;
                     onClicked();
                 } else
                 {

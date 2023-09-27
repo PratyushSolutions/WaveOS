@@ -11,6 +11,7 @@ namespace WaveOS.WinManager
 {
     public class window
     {
+#nullable enable
         public int x;
         public int y;
         public int width;
@@ -72,6 +73,12 @@ namespace WaveOS.WinManager
             ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + 7, y + height + 14 + 9, 9);
             ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + width - 8, y + height + 14 + 9, 9);
 
+            if ((MouseManager.X > x && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + height && MouseManager.MouseState == MouseState.Left)
+                && !focussed && !WaveConfigs.WindowMgr.activeWindowDragging && !moving)
+            {
+                WaveConfigs.WindowMgr.moveWindowToFront(this);
+            }
+
             if (focussed)
             {
                 //ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(163, 194, 255), x + 7, y + height + 20 + 5, width - 10, 9);
@@ -112,6 +119,7 @@ namespace WaveOS.WinManager
             if (moving && MouseManager.MouseState == MouseState.Left && MouseManager.X > 0 && MouseManager.Y > 25 && focussed)
             {
                 WaveConfigs.WindowMgr.activeWindowDragging = true;
+                WaveConfigs.WindowMgr.moveWindowToFront(this);
                 x = (int)MouseManager.X;
                 y = (int)MouseManager.Y;
             }
@@ -121,11 +129,11 @@ namespace WaveOS.WinManager
                 WaveConfigs.WindowMgr.activeWindowDragging = false;
             }
             if ((MouseManager.X > x && MouseManager.X < x + width - 15 && MouseManager.Y > y && MouseManager.Y < y + 20 && MouseManager.MouseState == MouseState.Left)
-                && wndType == WINDOWTYPE.Normal && focussed)
+                && wndType == WINDOWTYPE.Normal && focussed && !WaveConfigs.WindowMgr.activeWindowDragging)
             {
                 moving = true;                
             } else if ((MouseManager.X > x && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + height && MouseManager.MouseState == MouseState.Left)
-                && wndType == WINDOWTYPE.FullyDraggable && focussed)
+                && wndType == WINDOWTYPE.FullyDraggable && focussed && !WaveConfigs.WindowMgr.activeWindowDragging)
             {
                 moving = true;
             } else if ((MouseManager.X > x + 9 && MouseManager.X < x + 9 + 5 && MouseManager.Y > y + 10 && MouseManager.Y < y + 10 + 5 && MouseManager.MouseState == MouseState.Left)
@@ -158,5 +166,6 @@ namespace WaveOS.WinManager
         {
             drawing();
         }
+#nullable disable
     }
 }

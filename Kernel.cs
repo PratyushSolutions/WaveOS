@@ -1,4 +1,4 @@
-﻿using Cosmos.System.FileSystem.VFS;
+﻿ using Cosmos.System.FileSystem.VFS;
 using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
 using System.Collections.Generic;
@@ -10,6 +10,7 @@ using System;
 using Cosmos.System;
 using System.Threading;
 using WaveOS.Apps;
+using WaveOS.WaveAPI;
 
 namespace WaveOS
 {
@@ -85,6 +86,9 @@ namespace WaveOS
 
             //menu show
             WaveConfigs.UpperMenu.show(); //top menu with fps counter
+
+            //waveapis
+            Message.DrawCurrentMessage();
 
             //cursor
             if (Sys.MouseManager.X < 0)

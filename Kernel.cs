@@ -88,7 +88,11 @@ namespace WaveOS
             WaveConfigs.UpperMenu.show(); //top menu with fps counter
 
             //waveapis
-            Message.DrawCurrentMessage();
+            /*Message.WaveMessage msg = new();
+            msg.message = "Hello World!";
+            msg.id = 1;
+            Message.NewShow(new());
+            Message.DrawCurrentMessage();*/
 
             //cursor
             if (Sys.MouseManager.X < 0)
@@ -112,6 +116,8 @@ namespace WaveOS
 
             //rendering
             ImprovedVBE.display(display);
+            display.Display();
+            Heap.Collect();
             if (currentSignal == "WAIT5-CLOSE")
             {
                 ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(10, 10, 10), 0, 0, WaveConfigs.displayW - 1, WaveConfigs.displayH - 1);
@@ -121,7 +127,7 @@ namespace WaveOS
                 Thread.Sleep(1000);
                 ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(10, 10, 10), 0, 0, WaveConfigs.displayW - 1, WaveConfigs.displayH - 1);
                 ImprovedVBE._DrawACSIIString("Shutting down!", 5, 5, ImprovedVBE.colourToNumber(201, 28, 28));
-                
+
                 ImprovedVBE._DrawACSIIString("3..", 5, 20, ImprovedVBE.colourToNumber(255, 255, 255));
                 ImprovedVBE.display(display);
                 display.Display();
@@ -186,8 +192,6 @@ namespace WaveOS
                 Thread.Sleep(1000);
                 Power.Reboot();
             }
-            display.Display();
-            Heap.Collect();
         }
 
         public static void sendSignalToKernel(string signal) => currentSignal = signal;

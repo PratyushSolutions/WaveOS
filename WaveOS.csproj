@@ -25,8 +25,8 @@
         <VMWareEdition>Player</VMWareEdition>
         <IsPublishable>False</IsPublishable>
         <Timeout>0</Timeout>
-        <CompileVBEMultiboot>True</CompileVBEMultiboot>
-        <VBEResolution>1024x768x32</VBEResolution>
+        <CompileVBEMultiboot>False</CompileVBEMultiboot>
+        <VBEResolution>640x480x32</VBEResolution>
     </PropertyGroup>
 
     <ItemGroup>

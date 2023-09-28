@@ -16,7 +16,8 @@ namespace WaveOS
 {
     public class Kernel : Sys.Kernel
     {
-        public VBECanvas display = new(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
+        //public VBECanvas display = new(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
+        public static Canvas display = FullScreenCanvas.GetFullScreenCanvas(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
         public static string currentSignal = "NONE";
         protected override void BeforeRun()
         {
@@ -53,7 +54,7 @@ namespace WaveOS
         /// Modify this to redraw Background on next frame.
         /// </summary>
         public bool updateBg = true;
-
+        
         //fps shit
         public static int FPS = 0;
 
@@ -71,6 +72,7 @@ namespace WaveOS
                 if (DateTime.UtcNow.Second > LastS)
                 {
                     FPS = Ticken / (DateTime.UtcNow.Second - LastS);
+                    WaveConfigs.timer++;
                 }
                 LastS = DateTime.UtcNow.Second;
                 Ticken = 0;
@@ -154,8 +156,7 @@ namespace WaveOS
                 display.Display();
                 Thread.Sleep(1000);
                 Power.Shutdown();
-            }
-            if (currentSignal == "WAIT5-REBOOT")
+            } else if (currentSignal == "WAIT5-REBOOT")
             {
                 ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(10, 10, 10), 0, 0, WaveConfigs.displayW - 1, WaveConfigs.displayH - 1);
                 ImprovedVBE._DrawACSIIString("Rebooting the wave!", 5, 5, ImprovedVBE.colourToNumber(201, 28, 28));

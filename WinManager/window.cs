@@ -62,6 +62,9 @@ namespace WaveOS.WinManager
             showed = false;
         }
 
+        public int dragX;
+        public int dragY;
+
         public void update()
         {
             ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + 7, y + 9, 9);
@@ -120,21 +123,26 @@ namespace WaveOS.WinManager
             {
                 WaveConfigs.WindowMgr.activeWindowDragging = true;
                 WaveConfigs.WindowMgr.moveWindowToFront(this);
-                x = (int)MouseManager.X;
-                y = (int)MouseManager.Y;
+                x = (int)MouseManager.X - dragX;
+                y = (int)MouseManager.Y - dragY;
             }
             if (MouseManager.MouseState == MouseState.None)
             {
                 moving = false;
                 WaveConfigs.WindowMgr.activeWindowDragging = false;
+                dragX = 0; dragY = 0;
             }
             if ((MouseManager.X > x && MouseManager.X < x + width - 15 && MouseManager.Y > y && MouseManager.Y < y + 20 && MouseManager.MouseState == MouseState.Left)
                 && wndType == WINDOWTYPE.Normal && focussed && !WaveConfigs.WindowMgr.activeWindowDragging)
             {
-                moving = true;                
+                if (dragX == 0 && dragY == 0)
+                    dragX = (int)MouseManager.X - x; dragY = (int)MouseManager.Y - y;
+                moving = true;
             } else if ((MouseManager.X > x && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + height && MouseManager.MouseState == MouseState.Left)
                 && wndType == WINDOWTYPE.FullyDraggable && focussed && !WaveConfigs.WindowMgr.activeWindowDragging)
             {
+                if (dragX == 0 && dragY == 0)
+                    dragX = (int)MouseManager.X - x; dragY = (int)MouseManager.Y - y;
                 moving = true;
             } else if ((MouseManager.X > x + 9 && MouseManager.X < x + 9 + 5 && MouseManager.Y > y + 10 && MouseManager.Y < y + 10 + 5 && MouseManager.MouseState == MouseState.Left)
                 && wndType == WINDOWTYPE.Normal && focussed)

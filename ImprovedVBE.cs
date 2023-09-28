@@ -27,7 +27,7 @@ namespace WaveOS
         public static int width = WaveConfigs.displayW;
         public static int height = WaveConfigs.displayH;
 
-        public static void display(VBECanvas c)
+        public static void display(Canvas c)
         {
             c.DrawImage(cover, 0, 0);
             //clear(c, Color.Black);
@@ -35,7 +35,7 @@ namespace WaveOS
             clear(c, Color.Black);
         }
 
-        public static void clear(VBECanvas c, Color col)
+        public static void clear(Canvas c, Color col)
         {
             data.RawData.CopyTo(cover.RawData, 0);
         }
@@ -178,7 +178,7 @@ namespace WaveOS
                 scan_line++;
             }
         }
-
+        //main
         public static void DrawImageAlpha2(Image image, int x, int y)
         {
             int counter = 0;
@@ -215,7 +215,7 @@ namespace WaveOS
             }
         }
 
-        //Don't use this!
+        //secondary
         public static void DrawImageAlpha(Image image, int x, int y)
         {
             int counter = 0;

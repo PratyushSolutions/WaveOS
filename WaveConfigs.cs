@@ -35,6 +35,7 @@ namespace WaveOS
 
         public const int displayW = 1024;
         public const int displayH = 768;
+        public static int timer = 0;
 
         public const int defaultWindowPositionX = displayW / 2;
         public const int defaultWindowPositionY = displayH / 2;

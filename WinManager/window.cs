@@ -11,7 +11,6 @@ namespace WaveOS.WinManager
 {
     public class window
     {
-#nullable enable
         public int x;
         public int y;
         public int width;
@@ -84,7 +83,7 @@ namespace WaveOS.WinManager
             ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(bR, bG, bB), x + width - 8, y + height + 14 + 9, 9);
 
             if ((MouseManager.X > x && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + height && MouseManager.MouseState == MouseState.Left)
-                && !focussed && !WaveConfigs.WindowMgr.activeWindowDragging && !moving)
+                && !focussed && !WaveConfigs.WindowMgr.activeWindowDragging && !moving && !WaveConfigs.WindowMgr.checkBoundsWithFocussedWindow(this))
             {
                 WaveConfigs.WindowMgr.moveWindowToFront(this);
             }
@@ -191,6 +190,5 @@ namespace WaveOS.WinManager
         {
             drawing();
         }
-#nullable disable
     }
 }

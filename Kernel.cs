@@ -11,16 +11,23 @@ using Cosmos.System;
 using System.Threading;
 using WaveOS.Apps;
 using WaveOS.WaveAPI;
+using Cosmos.HAL.Drivers.Video.SVGAII;
 
 namespace WaveOS
 {
     public class Kernel : Sys.Kernel
     {
+        public static SVGAIICanvas display = new(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
         //public VBECanvas display = new(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
-        public static Canvas display = FullScreenCanvas.GetFullScreenCanvas(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
+        public static Canvas displayM = FullScreenCanvas.GetFullScreenCanvas(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
         public static string currentSignal = "NONE";
+        public static int useCanvas = 1;
         protected override void BeforeRun()
         {
+            if (VMTools.IsQEMU || VMTools.IsVMWare || VMTools.IsVirtualBox)
+            {
+                useCanvas = 2;
+            }
             try
             {
                 if (WaveConfigs.WaFs.Disks.Count > 0)
@@ -117,8 +124,15 @@ namespace WaveOS
             //prevY = (int)Sys.MouseManager.Y;
 
             //rendering
-            ImprovedVBE.display(display);
-            display.Display();
+            if (useCanvas == 1)
+            {
+                ImprovedVBE.display(display);
+                display.Display();
+            } else
+            {
+                ImprovedVBE.display(displayM);
+                displayM.Display();
+            }
             Heap.Collect();
             if (currentSignal == "WAIT5-CLOSE")
             {

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace WaveOS.WinManager
         public List<window> winList = new();
         public int currentFocussed = 0;
         public bool activeWindowDragging = false;
+        public bool activeWindowOnTop = false;
 
         public winmgr() {
             //init code
@@ -34,6 +36,9 @@ namespace WaveOS.WinManager
 
         public void update()
         {
+            if (!winList[winList.Count - 1].showed)
+                winList.Remove(winList[winList.Count - 1]);
+                moveWindowToFront(winList[winList.Count - 1]);
             if (KeyboardManager.TryReadKey(out var key))
             {
                 PassKeyToFocussedWindow(key);
@@ -60,6 +65,11 @@ namespace WaveOS.WinManager
                 winList.Remove(win);
             }
             winList.Add(win);
+        }
+
+        public bool checkBoundsWithFocussedWindow(window attemptWnd)
+        {
+            return activeWindowOnTop;
         }
 
         public void PassKeyToFocussedWindow(KeyEvent key)

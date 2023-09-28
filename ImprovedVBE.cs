@@ -27,6 +27,19 @@ namespace WaveOS
         public static int width = WaveConfigs.displayW;
         public static int height = WaveConfigs.displayH;
 
+        public static void display(SVGAIICanvas c)
+        {
+            c.DrawImage(cover, 0, 0);
+            //clear(c, Color.Black);
+            //cover.RawData = data.RawData;
+            clear(c, Color.Black);
+        }
+
+        public static void clear(SVGAIICanvas c, Color col)
+        {
+            data.RawData.CopyTo(cover.RawData, 0);
+        }
+
         public static void display(Canvas c)
         {
             c.DrawImage(cover, 0, 0);

@@ -42,6 +42,13 @@ namespace WaveOS.WinManager
 
         public void render()
         {
+            if (focussed &&
+                MouseManager.X > x && MouseManager.X < x + width &&
+                MouseManager.Y > y && MouseManager.Y < y + height)
+            {
+                WaveConfigs.WindowMgr.activeWindowOnTop = true;
+            }
+            else { WaveConfigs.WindowMgr.activeWindowOnTop = false; }
             if (msgBox)
             {
                 bR = 150; bG = 150; bB = 150;
@@ -80,6 +87,12 @@ namespace WaveOS.WinManager
                 && !focussed && !WaveConfigs.WindowMgr.activeWindowDragging && !moving)
             {
                 WaveConfigs.WindowMgr.moveWindowToFront(this);
+            }
+
+            if ((MouseManager.X > x && MouseManager.X < x + 10 && MouseManager.Y > y && MouseManager.Y < y + 10 && MouseManager.MouseState == MouseState.Left)
+                && wndType == WINDOWTYPE.Normal && focussed)
+            {
+                showed = false;
             }
 
             if (focussed)
@@ -123,8 +136,14 @@ namespace WaveOS.WinManager
             {
                 WaveConfigs.WindowMgr.activeWindowDragging = true;
                 WaveConfigs.WindowMgr.moveWindowToFront(this);
-                x = (int)MouseManager.X - dragX;
-                y = (int)MouseManager.Y - dragY;
+                if ((int)MouseManager.X - dragX + width < WaveConfigs.displayW
+                    && (int)MouseManager.Y - dragY + height < WaveConfigs.displayH &&
+                    (int)MouseManager.X - dragX > 0
+                    && (int)MouseManager.Y - dragY > 0)
+                {
+                    x = (int)MouseManager.X - dragX;
+                    y = (int)MouseManager.Y - dragY;
+                }
             }
             if (MouseManager.MouseState == MouseState.None)
             {
@@ -144,18 +163,16 @@ namespace WaveOS.WinManager
                 if (dragX == 0 && dragY == 0)
                     dragX = (int)MouseManager.X - x; dragY = (int)MouseManager.Y - y;
                 moving = true;
-            } else if ((MouseManager.X > x + 9 && MouseManager.X < x + 9 + 5 && MouseManager.Y > y + 10 && MouseManager.Y < y + 10 + 5 && MouseManager.MouseState == MouseState.Left)
-                && wndType == WINDOWTYPE.Normal && focussed)
-            {
-                showed = false;
             }
 
             if (MouseManager.X > x && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + 20 && MouseManager.MouseState == MouseState.Left
-                && wndType == WINDOWTYPE.Normal && !focussed && !WaveConfigs.WindowMgr.activeWindowDragging)
+                && wndType == WINDOWTYPE.Normal && !focussed && !WaveConfigs.WindowMgr.activeWindowDragging &&
+                !WaveConfigs.WindowMgr.checkBoundsWithFocussedWindow(this))
             {
                 WaveConfigs.WindowMgr.moveWindowToFront(this);
             } else if (MouseManager.X > x && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + height && MouseManager.MouseState == MouseState.Left
-                && wndType == WINDOWTYPE.FullyDraggable && !focussed && !WaveConfigs.WindowMgr.activeWindowDragging)
+                && wndType == WINDOWTYPE.FullyDraggable && !focussed && !WaveConfigs.WindowMgr.activeWindowDragging &&
+                !WaveConfigs.WindowMgr.checkBoundsWithFocussedWindow(this))
             {
                 WaveConfigs.WindowMgr.moveWindowToFront(this);
             }

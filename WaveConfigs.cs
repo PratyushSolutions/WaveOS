@@ -19,6 +19,8 @@ namespace WaveOS
 
         //public static Canvas display;
 
+        [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_HandCursor.bmp")] public static byte[] rawHandCursor;
+        public static Bitmap waveHandCursor = new Bitmap(WaveConfigs.rawHandCursor);
         [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_background.bmp")] public static byte[] rawWaveBg;
         public static Bitmap waveBg = new Bitmap(WaveConfigs.rawWaveBg);
         [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_Cursor.bmp")] public static byte[] rawWaveCursor;

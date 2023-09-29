@@ -113,6 +113,16 @@ namespace WaveOS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] WaveOS_HandCursor {
+            get {
+                object obj = ResourceManager.GetObject("WaveOS_HandCursor", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] WaveOS_icon {
             get {
                 object obj = ResourceManager.GetObject("WaveOS_icon", resourceCulture);

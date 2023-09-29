@@ -35,6 +35,7 @@
       <None Remove="Resources\WaveOS_background_720.bmp" />
       <None Remove="Resources\WaveOS_background_768.bmp" />
       <None Remove="Resources\WaveOS_Cursor.bmp" />
+      <None Remove="Resources\WaveOS_HandCursor.bmp" />
       <None Remove="Resources\WaveOS_icon.bmp" />
       <None Remove="Resources\WaveOS_TopBar.bmp" />
       <None Remove="Resources\WaveTerm.bmp" />
@@ -46,6 +47,7 @@
       <EmbeddedResource Include="Resources\WaveOS_background_720.bmp" />
       <EmbeddedResource Include="Resources\WaveOS_background_768.bmp" />
       <EmbeddedResource Include="Resources\WaveOS_Cursor.bmp" />
+      <EmbeddedResource Include="Resources\WaveOS_HandCursor.bmp" />
       <EmbeddedResource Include="Resources\WaveOS_icon.bmp" />
       <EmbeddedResource Include="Resources\WaveOS_TopBar.bmp" />
       <EmbeddedResource Include="Resources\WaveTerm.bmp" />

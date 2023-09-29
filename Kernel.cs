@@ -24,7 +24,7 @@ namespace WaveOS
         public static int useCanvas = 1;
         protected override void BeforeRun()
         {
-            if (VMTools.IsQEMU || VMTools.IsVMWare || VMTools.IsVirtualBox)
+            if (VMTools.IsVMWare || VMTools.IsVirtualBox)
             {
                 useCanvas = 2;
             }
@@ -119,19 +119,19 @@ namespace WaveOS
             {
                 Sys.MouseManager.Y = WaveConfigs.displayH - WaveConfigs.waveCursor.Height;
             }
-            ImprovedVBE.DrawImageAlpha(WaveConfigs.waveCursor, (int)Sys.MouseManager.X, (int)Sys.MouseManager.Y);
+            ImprovedVBE.DrawImageAlpha(WaveConfigs.waveHandCursor, (int)Sys.MouseManager.X, (int)Sys.MouseManager.Y);
             //prevX = (int)Sys.MouseManager.X;
             //prevY = (int)Sys.MouseManager.Y;
 
             //rendering
             if (useCanvas == 1)
             {
-                ImprovedVBE.display(display);
-                display.Display();
-            } else
-            {
                 ImprovedVBE.display(displayM);
                 displayM.Display();
+            } else
+            {
+                ImprovedVBE.display(display);
+                display.Display();
             }
             Heap.Collect();
             if (currentSignal == "WAIT5-CLOSE")

@@ -88,8 +88,8 @@ namespace WaveOS.WinManager
                 WaveConfigs.WindowMgr.moveWindowToFront(this);
             }
 
-            if ((MouseManager.X > x && MouseManager.X < x + 10 && MouseManager.Y > y && MouseManager.Y < y + 10 && MouseManager.MouseState == MouseState.Left)
-                && wndType == WINDOWTYPE.Normal && focussed)
+            if ((MouseManager.X > x && MouseManager.X < x + 20 && MouseManager.Y > y && MouseManager.Y < y + 10 && MouseManager.MouseState == MouseState.Left)
+                && wndType == WINDOWTYPE.Normal)
             {
                 showed = false;
             }
@@ -150,7 +150,7 @@ namespace WaveOS.WinManager
                 WaveConfigs.WindowMgr.activeWindowDragging = false;
                 dragX = 0; dragY = 0;
             }
-            if ((MouseManager.X > x && MouseManager.X < x + width - 15 && MouseManager.Y > y && MouseManager.Y < y + 20 && MouseManager.MouseState == MouseState.Left)
+            if ((MouseManager.X > x + 10 && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + 20 && MouseManager.MouseState == MouseState.Left)
                 && wndType == WINDOWTYPE.Normal && focussed && !WaveConfigs.WindowMgr.activeWindowDragging)
             {
                 if (dragX == 0 && dragY == 0)

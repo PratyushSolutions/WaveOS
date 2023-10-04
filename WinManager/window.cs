@@ -144,7 +144,7 @@ namespace WaveOS.WinManager
                     y = (int)MouseManager.Y - dragY;
                 }
             }
-            if (MouseManager.MouseState == MouseState.None)
+            if (MouseManager.MouseState == MouseState.None && moving)
             {
                 moving = false;
                 WaveConfigs.WindowMgr.activeWindowDragging = false;

@@ -35,8 +35,6 @@ namespace WaveOS.Apps
         public void onClick_buttonOk()
         {
             WaveConfigs.WindowMgr.winList.Remove(newWin);
-            newWin.showed = false;
-            WaveConfigs.WindowMgr.winList.Add(newWin);
         }
     }
 }

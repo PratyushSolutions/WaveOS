@@ -393,6 +393,10 @@ namespace WaveOS
         {
             return (r << 16) + (g << 8) + (b);
         }
+        public static int colourToNumber(int grayNum)
+        {
+            return (grayNum << 16) + (grayNum << 8) + (grayNum);
+        }
 
         public static void line(float x1, float y1, float x2, float y2, int color)
         {

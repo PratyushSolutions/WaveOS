@@ -21,7 +21,7 @@ namespace WaveOS.GraphicsWidgets
         public int g;
         public int b;
 
-        public Button(window parentWindow, int x, int y, int width, int height, string text, int colorR = 21, int colorG = 101, int colorB = 238)
+        public Button(window parentWindow, int x, int y, int width, int height, string text, int colorR = -1, int colorG = -1, int colorB = -1)
         {
             this.parent = parentWindow;
             this.x = x;
@@ -29,6 +29,12 @@ namespace WaveOS.GraphicsWidgets
             this.width = width - height / 2;
             this.height = height;
             this.label = text;
+            if (colorR == -1 || colorG == -1 || colorB == -1)
+            {
+                colorR = WaveConfigs.cTheme.btBg.r;
+                colorG = WaveConfigs.cTheme.btBg.g;
+                colorB = WaveConfigs.cTheme.btBg.b;
+            }
             this.r = colorR;
             this.g = colorG;
             this.b = colorB;

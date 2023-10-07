@@ -57,6 +57,16 @@ namespace WaveOS
             WaveConfigs.UpperMenu = new();
             WaveConfigs.UpperMenu.init();
 
+            WaveConfigs.logTheme_Dark = new(new(33, 33, 33), new(255, 255, 255), new(16, 50, 173));
+            WaveConfigs.logTheme_Light = new();
+            WaveConfigs.darkMode = new(new(255, 255, 255), new(30, 31, 35), new(150, 150, 150),
+                                                        new(21, 101, 238), new(255, 255, 255),
+                                                        new(255),
+                                                        new(37), new(255), new(80), new(255));
+
+            WaveConfigs.cTheme = WaveConfigs.darkMode;
+            WaveConfigs.logonThemeConfig = WaveConfigs.logTheme_Dark;
+
         login:
             if (!loggedIn)
             {

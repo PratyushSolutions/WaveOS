@@ -14,17 +14,17 @@ namespace WaveOS.WaveAPI
         public static bool showScreen()
         {
             // background
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(16, 50, 173), 0, 0, WaveConfigs.displayW - 1, WaveConfigs.displayH - 1);
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(WaveConfigs.logonThemeConfig.lBgCo.r, WaveConfigs.logonThemeConfig.lBgCo.g, WaveConfigs.logonThemeConfig.lBgCo.b), 0, 0, WaveConfigs.displayW - 1, WaveConfigs.displayH - 1);
 
             // time
             ImprovedVBE._DrawACSIIString(DateTime.Now.ToString().Split(' ')[1], (WaveConfigs.displayW / 2) - (DateTime.Now.ToString().Split(' ')[1].Length * 6), 50, ImprovedVBE.colourToNumber(255, 255, 255));
 
             // 'unlock' button
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(33, 33, 33), WaveConfigs.displayW / 2 - (150 / 2), WaveConfigs.displayH / 2 - (50 / 2) + 24, 24);
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(33, 33, 33), WaveConfigs.displayW / 2 - (150 / 2), WaveConfigs.displayH / 2 - (50 / 2), 150, 50);
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(33, 33, 33), WaveConfigs.displayW / 2 + 74, WaveConfigs.displayH / 2 - (50 / 2) + 24, 24);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(WaveConfigs.logonThemeConfig.lBtnBg.r, WaveConfigs.logonThemeConfig.lBtnBg.g, WaveConfigs.logonThemeConfig.lBtnBg.b), WaveConfigs.displayW / 2 - (150 / 2), WaveConfigs.displayH / 2 - (50 / 2) + 24, 24);
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(WaveConfigs.logonThemeConfig.lBtnBg.r, WaveConfigs.logonThemeConfig.lBtnBg.g, WaveConfigs.logonThemeConfig.lBtnBg.b), WaveConfigs.displayW / 2 - (150 / 2), WaveConfigs.displayH / 2 - (50 / 2), 150, 50);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(WaveConfigs.logonThemeConfig.lBtnBg.r, WaveConfigs.logonThemeConfig.lBtnBg.g, WaveConfigs.logonThemeConfig.lBtnBg.b), WaveConfigs.displayW / 2 + 74, WaveConfigs.displayH / 2 - (50 / 2) + 24, 24);
 
-            ImprovedVBE._DrawACSIIString(unlock, WaveConfigs.displayW / 2 - (150 / 2) + 30, WaveConfigs.displayH / 2 - (50 / 2 / 2) + 5, ImprovedVBE.colourToNumber(255,255,255));
+            ImprovedVBE._DrawACSIIString(unlock, WaveConfigs.displayW / 2 - (150 / 2) + 30, WaveConfigs.displayH / 2 - (50 / 2 / 2) + 5, ImprovedVBE.colourToNumber(WaveConfigs.logonThemeConfig.lBtnFo.r, WaveConfigs.logonThemeConfig.lBtnFo.g, WaveConfigs.logonThemeConfig.lBtnFo.b));
 
 
             // logics

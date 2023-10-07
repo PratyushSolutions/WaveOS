@@ -39,12 +39,13 @@ namespace WaveOS
 
         public const int displayW = 1024;
         public const int displayH = 768;
-        public static ThemeConfiguration cTheme = lightMode;
-        public static ThemeConfiguration darkMode = new(new(255, 255, 255), new(30, 31, 35), new(150, 150, 150),
-                                                        new(21, 101, 238) , new(255, 255, 255),
-                                                        new(255),
-                                                        new(37), new(255), new(80), new(255));
-        public static ThemeConfiguration lightMode = new();
+        public static ThemeConfiguration cTheme;
+        public static ThemeConfiguration darkMode;
+        public static ThemeConfiguration lightMode;
+
+        public static LogonThemeConfig logonThemeConfig;
+        public static LogonThemeConfig logTheme_Light;
+        public static LogonThemeConfig logTheme_Dark;
         public static int timer = 0;
 
         public const int defaultWindowPositionX = displayW / 2;
@@ -111,5 +112,23 @@ namespace WaveOS
         public ThColor btBg , btFo                   ;
         public ThColor lbFo                          ;
         public ThColor gMBg , gMFo , gMI_Bg , gMI_Fo ;
+    }
+
+    public struct LogonThemeConfig
+    {
+        public LogonThemeConfig(ThColor logonButtonBackground,
+                                ThColor logonButtonForeground,
+                                
+                                ThColor logonBackgroundColor)
+        {
+            lBtnBg = logonButtonBackground;
+            lBtnFo = logonButtonForeground;
+            lBgCo  = logonBackgroundColor ;
+        }
+
+        public ThColor lBtnBg;
+        public ThColor lBtnFo;
+
+        public ThColor lBgCo;
     }
 }

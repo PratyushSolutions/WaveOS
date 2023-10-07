@@ -39,20 +39,20 @@ namespace WaveOS.SystemMenus
 
         public void init()
         {
-            menuColor.c = 37;
+            menuColor.c = WaveConfigs.cTheme.gMBg.r;
 
 
-            waveOSMenu_Back.c = 80;
-            waveOSMenu_Fore.c = 255;
+            waveOSMenu_Back.c = WaveConfigs.cTheme.gMI_Bg.r;
+            waveOSMenu_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
 
-            waveOSMenu__Shutdown_Fore.c = 255;
-            waveOSMenu__Shutdown_Back.c = 80;
+            waveOSMenu__Shutdown_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
+            waveOSMenu__Shutdown_Back.c = WaveConfigs.cTheme.gMI_Bg.r;
 
-            waveOSMenu__About_Fore.c = 255;
-            waveOSMenu__About_Back.c = 80;
+            waveOSMenu__About_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
+            waveOSMenu__About_Back.c = WaveConfigs.cTheme.gMI_Bg.r;
 
-            waveOSMenu__Reboot_Fore.c = 255;
-            waveOSMenu__Reboot_Back.c = 80;
+            waveOSMenu__Reboot_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
+            waveOSMenu__Reboot_Back.c = WaveConfigs.cTheme.gMI_Bg.r;
         }
 
         public bool toggledMenu_WaveOSMenu = false;
@@ -67,10 +67,10 @@ namespace WaveOS.SystemMenus
                 //currentColor_WaveOSMenu_ForeG = menuG;
                 //currentColor_WaveOSMenu_ForeB = menuB;
 
-                waveOSMenu_Back.c = 80;
+                waveOSMenu_Back.c = WaveConfigs.cTheme.gMI_Bg.r;
             } else
             {
-                waveOSMenu_Fore.c = 255;
+                waveOSMenu_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
                 waveOSMenu_Back.c = menuColor.c;
             }
 
@@ -99,8 +99,6 @@ namespace WaveOS.SystemMenus
                     if (MouseManager.MouseState == MouseState.Left)
                     {
                         toggledMenu_WaveOSMenu = false;
-                        ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(10, 10, 10), 0, 0, WaveConfigs.displayW - 2, WaveConfigs.displayH - 2);
-                        ImprovedVBE._DrawACSIIString("Shutting down!", 5, 5, ImprovedVBE.colourToNumber(201, 28, 28));
                         Kernel.sendSignalToKernel("WAIT5-CLOSE");
                         return;
                     } else
@@ -110,8 +108,8 @@ namespace WaveOS.SystemMenus
                     }
                 } else
                 {
-                    waveOSMenu__Shutdown_Fore.c = 255;
-                    waveOSMenu__Shutdown_Back.c = 80;
+                    waveOSMenu__Shutdown_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
+                    waveOSMenu__Shutdown_Back.c = WaveConfigs.cTheme.gMI_Bg.r;
                 }
 
                 //--WaveOS permanent menu --> about button
@@ -133,9 +131,9 @@ namespace WaveOS.SystemMenus
                 }
                 else
                 {
-                    waveOSMenu__About_Fore.c = 255;
+                    waveOSMenu__About_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
 
-                    waveOSMenu__About_Back.c = 80;
+                    waveOSMenu__About_Back.c = WaveConfigs.cTheme.gMI_Bg.r;
                 }
 
                 //--WaveOS permanent menu --> reboot button
@@ -157,8 +155,8 @@ namespace WaveOS.SystemMenus
                 }
                 else
                 {
-                    waveOSMenu__Reboot_Fore.c = 255;
-                    waveOSMenu__Reboot_Back.c = 80;
+                    waveOSMenu__Reboot_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
+                    waveOSMenu__Reboot_Back.c = WaveConfigs.cTheme.gMI_Bg.r;
                 }
             }
 

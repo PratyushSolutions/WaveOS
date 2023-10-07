@@ -17,11 +17,17 @@ namespace WaveOS.GraphicsWidgets
         public int x;
         public int y;
 
-        public Label(window parentWindow, int x, int y, string label, int r = 255, int g = 255, int b = 255) {
+        public Label(window parentWindow, int x, int y, string label, int r = -1, int g = -1, int b = -1) {
             this.parent = parentWindow;
             this.x = x;
             this.y = y;
             this.label = label;
+            if (r == -1 || g == -1 || b == -1)
+            {
+                r = WaveConfigs.cTheme.lbFo.r;
+                g = WaveConfigs.cTheme.lbFo.g;
+                b = WaveConfigs.cTheme.lbFo.b;
+            }
             this.r = r;
             this.g = g;
             this.b = b;

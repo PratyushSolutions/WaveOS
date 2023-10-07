@@ -26,9 +26,9 @@ namespace WaveOS.WinManager
         public Bitmap logo;
         public bool msgBox = false;
 
-        public int bR = 30;
-        public int bG = 31;
-        public int bB = 35;
+        public int bR = WaveConfigs.cTheme.winBg.r;
+        public int bG = WaveConfigs.cTheme.winBg.g;
+        public int bB = WaveConfigs.cTheme.winBg.b;
 
         public window(Action ControlsDraw, string title, Action? keyHandler = null, Bitmap? Logo = null)
         {
@@ -54,7 +54,7 @@ namespace WaveOS.WinManager
             }
             else
             {
-                bR = 30; bG = 31; bB = 35;
+                bR = WaveConfigs.cTheme.winBg.r; bG = WaveConfigs.cTheme.winBg.g; bB = WaveConfigs.cTheme.winBg.b;
             }
 
             if (showed)

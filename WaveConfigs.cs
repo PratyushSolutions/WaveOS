@@ -35,6 +35,8 @@ namespace WaveOS
         [ManifestResourceStream(ResourceName = "WaveOS.Resources.WaveOS_TopBar.bmp")] public static byte[] rawWaveTopBar;
         public static Bitmap waveTopBar = new Bitmap(WaveConfigs.rawWaveTopBar);
 
+        public static Bitmap currentCursor = waveCursor;
+
         public const int displayW = 1024;
         public const int displayH = 768;
         public static int timer = 0;

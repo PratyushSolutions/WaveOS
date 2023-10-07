@@ -63,10 +63,7 @@ namespace WaveOS.WinManager
             return;
         }
 
-        public void close()
-        {
-            showed = false;
-        }
+        public void close() => showed = false;
 
         public int dragX;
         public int dragY;

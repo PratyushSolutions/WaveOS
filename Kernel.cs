@@ -22,6 +22,7 @@ namespace WaveOS
         public static Canvas displayM = FullScreenCanvas.GetFullScreenCanvas(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
         public static string currentSignal = "NONE";
         public static int useCanvas = 1;
+        public bool loggedIn = false;
         protected override void BeforeRun()
         {
             if (VMTools.IsVMWare || VMTools.IsVirtualBox)
@@ -54,6 +55,41 @@ namespace WaveOS
 
             WaveConfigs.UpperMenu = new();
             WaveConfigs.UpperMenu.init();
+
+        login:
+            if (!loggedIn)
+            {
+                loggedIn = LogonScreen.showScreen();
+                if (Sys.MouseManager.X < 0)
+                {
+                    Sys.MouseManager.X = 0;
+                }
+                else if (Sys.MouseManager.X + WaveConfigs.currentCursor.Width > WaveConfigs.displayW)
+                {
+                    Sys.MouseManager.X = WaveConfigs.displayW - WaveConfigs.currentCursor.Width;
+                }
+                if (Sys.MouseManager.Y < 0)
+                {
+                    Sys.MouseManager.Y = 0;
+                }
+                else if (Sys.MouseManager.Y + WaveConfigs.currentCursor.Height > WaveConfigs.displayH)
+                {
+                    Sys.MouseManager.Y = WaveConfigs.displayH - WaveConfigs.currentCursor.Height;
+                }
+                ImprovedVBE.DrawImageAlpha(WaveConfigs.currentCursor, (int)Sys.MouseManager.X, (int)Sys.MouseManager.Y);
+                if (useCanvas == 1)
+                {
+                    ImprovedVBE.display(displayM);
+                    displayM.Display();
+                }
+                else
+                {
+                    ImprovedVBE.display(display);
+                    display.Display();
+                }
+                Heap.Collect();
+                goto login;
+            }
         }
         private int frameCounter = 0;
         
@@ -107,19 +143,19 @@ namespace WaveOS
             if (Sys.MouseManager.X < 0)
             {
                 Sys.MouseManager.X = 0;
-            } else if (Sys.MouseManager.X + WaveConfigs.waveCursor.Width > WaveConfigs.displayW)
+            } else if (Sys.MouseManager.X + WaveConfigs.currentCursor.Width > WaveConfigs.displayW)
             {
-                Sys.MouseManager.X = WaveConfigs.displayW - WaveConfigs.waveCursor.Width;
+                Sys.MouseManager.X = WaveConfigs.displayW - WaveConfigs.currentCursor.Width;
             }
             if (Sys.MouseManager.Y < 0)
             {
                 Sys.MouseManager.Y = 0;
             }
-            else if (Sys.MouseManager.Y + WaveConfigs.waveCursor.Height > WaveConfigs.displayH)
+            else if (Sys.MouseManager.Y + WaveConfigs.currentCursor.Height > WaveConfigs.displayH)
             {
-                Sys.MouseManager.Y = WaveConfigs.displayH - WaveConfigs.waveCursor.Height;
+                Sys.MouseManager.Y = WaveConfigs.displayH - WaveConfigs.currentCursor.Height;
             }
-            ImprovedVBE.DrawImageAlpha(WaveConfigs.waveHandCursor, (int)Sys.MouseManager.X, (int)Sys.MouseManager.Y);
+            ImprovedVBE.DrawImageAlpha(WaveConfigs.currentCursor, (int)Sys.MouseManager.X, (int)Sys.MouseManager.Y);
             //prevX = (int)Sys.MouseManager.X;
             //prevY = (int)Sys.MouseManager.Y;
 

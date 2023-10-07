@@ -29,6 +29,7 @@ namespace WaveOS
             {
                 useCanvas = 2;
             }
+
             try
             {
                 if (WaveConfigs.WaFs.Disks.Count > 0)

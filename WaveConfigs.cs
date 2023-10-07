@@ -39,6 +39,12 @@ namespace WaveOS
 
         public const int displayW = 1024;
         public const int displayH = 768;
+        public static ThemeConfiguration cTheme = lightMode;
+        public static ThemeConfiguration darkMode = new(new(255, 255, 255), new(30, 31, 35), new(150, 150, 150),
+                                                        new(21, 101, 238) , new(255, 255, 255),
+                                                        new(255),
+                                                        new(37), new(255), new(80), new(255));
+        public static ThemeConfiguration lightMode = new();
         public static int timer = 0;
 
         public const int defaultWindowPositionX = displayW / 2;
@@ -60,5 +66,50 @@ namespace WaveOS
                 if (procID == 0) { Cosmos.System.Power.Shutdown(); }
             }
         }
+    }
+
+    public struct ThColor
+    {
+        public ThColor(int single)
+        {
+            r = single; g = single; b = single;
+        }
+
+        public ThColor(int r, int g, int b)
+        {
+            this.r = r; this.g = g; this.b = b;
+        }
+
+        public int r;
+        public int g;
+        public int b;
+    }
+
+    public struct ThemeConfiguration
+    {
+        public ThemeConfiguration(ThColor windowFore , ThColor windowBody, ThColor msgBoxColor   ,
+                                  ThColor buttonBack , ThColor buttonFore,
+                                  ThColor labelFore  ,
+                                  ThColor gMenuBack  , ThColor gMenuFore , ThColor gMenu_ItemBack, ThColor gMenu_ItemFore)
+        {
+            winT          = windowFore     ;
+            winBg         = windowBody     ;
+            mBColor       = msgBoxColor    ;
+            
+            btBg          = buttonBack     ;
+            btFo          = buttonFore     ;
+
+            lbFo          = labelFore      ;
+
+            gMBg          = gMenuBack      ;
+            gMFo          = gMenuFore      ;
+            gMI_Bg        = gMenu_ItemBack ;
+            gMI_Fo        = gMenu_ItemFore ;
+        }
+
+        public ThColor winT , winBg, mBColor         ;
+        public ThColor btBg , btFo                   ;
+        public ThColor lbFo                          ;
+        public ThColor gMBg , gMFo , gMI_Bg , gMI_Fo ;
     }
 }

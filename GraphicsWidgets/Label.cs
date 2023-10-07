@@ -17,7 +17,7 @@ namespace WaveOS.GraphicsWidgets
         public int x;
         public int y;
 
-        public Label(window parentWindow, int x, int y, string label, int r, int g, int b) {
+        public Label(window parentWindow, int x, int y, string label, int r = 255, int g = 255, int b = 255) {
             this.parent = parentWindow;
             this.x = x;
             this.y = y;

@@ -129,6 +129,6 @@ namespace WaveOS
         public ThColor lBtnBg;
         public ThColor lBtnFo;
 
-        public ThColor lBgCo;
+        public ThColor lBgCo ;
     }
 }

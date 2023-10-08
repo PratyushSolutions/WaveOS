@@ -52,10 +52,19 @@ namespace WaveOS
         {
             data.RawData.CopyTo(cover.RawData, 0);
         }
-        public static void DrawPixelfortext(int x, int y, int color)
+        public static void DrawPixelfortext2(int x, int y, int color)
         {
             //16777215 white
             if (x >= 0 && x <= width && y >= 0 && y <= height)
+            {
+                cover.RawData[y * width + x] = color;
+            }
+        }
+
+        public static void DrawPixelfortext(int x, int y, int color)
+        {
+            //16777215 white
+            if (x > 0 && x < width && y > 0 && y < height)
             {
                 cover.RawData[y * width + x] = color;
             }
@@ -95,7 +104,7 @@ namespace WaveOS
             }
         }
 
-        public static void DrawFilledRectangle(int color, int X, int Y, int Width, int Height)
+        public static void DrawFilledRectangle2(int color, int X, int Y, int Width, int Height)
         {
             if (X <= width)
             {
@@ -111,6 +120,28 @@ namespace WaveOS
                 Array.Fill(line, color);
 
                 for (int i = Y - 1; i < Y + Height - 1; i++)
+                {
+                    Array.Copy(line, 0, cover.RawData, (i * width) + X, line.Length);
+                }
+            }
+        }
+
+        public static void DrawFilledRectangle(int color, int X, int Y, int Width, int Height)
+        {
+            if (X <= width)
+            {
+                int[] line = new int[Width];
+                if (X < 0)
+                {
+                    line = new int[Width + X];
+                }
+                else if (X + Width > width)
+                {
+                    line = new int[Width - (X + Width - width)];
+                }
+                Array.Fill(line, color);
+
+                for (int i = Y; i < Y + Height; i++)
                 {
                     Array.Copy(line, 0, cover.RawData, (i * width) + X, line.Length);
                 }

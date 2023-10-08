@@ -59,7 +59,7 @@ namespace WaveOS.SystemMenus
 
         public void show()
         {
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(menuColor.c), 0, 0, WaveConfigs.displayW - 1, menuHeight);
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(menuColor.c, menuColor.c, menuColor.c), 0, 0, WaveConfigs.displayW, menuHeight);
 
             if (toggledMenu_WaveOSMenu)
             {
@@ -77,8 +77,8 @@ namespace WaveOS.SystemMenus
             //global menu
 
             //--WaveOS permanent menu
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(waveOSMenu_Back.c), 15, menuHeight / 2 - 1, menuHeight / 2);
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(waveOSMenu_Back.c), 15 + 45, menuHeight / 2 - 1, menuHeight / 2);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(waveOSMenu_Back.c), 15, menuHeight / 2, menuHeight / 2 + 1);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(waveOSMenu_Back.c), 15 + 45, menuHeight / 2, menuHeight / 2);
             ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(waveOSMenu_Back.c), 20, 0, 45, menuHeight);
             //ImprovedVBE.DrawImageAlpha(WaveConfigs.waveTopBar, 0, 0);
             ImprovedVBE._DrawACSIIString("WaveOS", 15, 5, ImprovedVBE.colourToNumber(waveOSMenu_Fore.c));

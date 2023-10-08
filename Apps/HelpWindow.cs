@@ -20,7 +20,7 @@ namespace WaveOS.Apps
             newWin.height = 80;
             newWin.wndType = WINDOWTYPE.Normal;
             newWin.showed = true;
-            WaveConfigs.WindowMgr.winList.Add(newWin);
+            winmgr.winList.Add(newWin);
         }
 
         public void Controls()
@@ -34,9 +34,9 @@ namespace WaveOS.Apps
 
         public void onClick_buttonOk()
         {
-            WaveConfigs.WindowMgr.winList.Remove(newWin);
+            winmgr.winList.Remove(newWin);
             newWin.close();
-            WaveConfigs.WindowMgr.winList.Add(newWin);
+            winmgr.winList.Add(newWin);
         }
     }
 }

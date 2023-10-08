@@ -12,6 +12,8 @@ using System.Threading;
 using WaveOS.Apps;
 using WaveOS.WaveAPI;
 using Cosmos.HAL.Drivers.Video.SVGAII;
+using System.Collections;
+using WaveOS.SystemMenus;
 
 namespace WaveOS
 {
@@ -62,7 +64,7 @@ namespace WaveOS
             WaveConfigs.darkMode = new(new(255, 255, 255), new(30, 31, 35), new(150, 150, 150),
                                                         new(21, 101, 238), new(255, 255, 255),
                                                         new(255),
-                                                        new(37), new(255), new(80), new(255));
+                                                        new(52, 51, 56), new(255), new(80), new(255));
 
             WaveConfigs.cTheme = WaveConfigs.darkMode;
             WaveConfigs.logonThemeConfig = WaveConfigs.logTheme_Dark;
@@ -101,9 +103,17 @@ namespace WaveOS
                 Heap.Collect();
                 goto login;
             }
+            window backHold = new(new(nothing), "SYS");
+            backHold.x = 0; backHold.y = 0;
+            backHold.width = topmenu.menuHeight / 2; backHold.height = topmenu.menuHeight / 2;
+            backHold.showed = true;
+            backHold.hidden = true;
+            backHold.wndType = WINDOWTYPE.FullyDraggable;
+            winmgr.winList.Add(backHold);
         }
         private int frameCounter = 0;
-        
+
+        public void nothing() { if (0 == 0) { return; } }
         /// <summary>
         /// Modify this to redraw Background on next frame.
         /// </summary>

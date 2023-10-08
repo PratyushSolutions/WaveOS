@@ -53,12 +53,12 @@ namespace WaveOS.GraphicsWidgets
             {
                 y += 21;
             }
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(tempR, tempG, tempB), (parent.x + x) + height / 2, (parent.y + y) + height / 2 - 1, height / 2);
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(tempR, tempG, tempB), (parent.x + x + width) + height / 2, (parent.y + y) + height / 2 - 1, height / 2);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(tempR, tempG, tempB), (parent.x + x) + height / 2, (parent.y + y) + height / 2, height / 2);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(tempR, tempG, tempB), (parent.x + x + width) + height / 2, (parent.y + y) + height / 2, height / 2);
             ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(tempR, tempG, tempB), (parent.x + x) + height / 2, parent.y + y, width, height);
             ImprovedVBE._DrawACSIIString(label, parent.x + x + 7, parent.y + y + 7, ImprovedVBE.colourToNumber(255,255,255));
-            if (MouseManager.X > parent.x + x && MouseManager.X < parent.x + x + width
-                && MouseManager.Y > parent.y + y && MouseManager.Y < parent.y + y + height
+            if (MouseManager.X > parent.x + x && MouseManager.X < parent.x + x + width + width / 2
+                && MouseManager.Y > parent.y + y && MouseManager.Y < parent.y + y + height + height / 2
                 && parent.focussed)
             {
                 if (MouseManager.MouseState == MouseState.Left)

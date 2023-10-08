@@ -29,7 +29,7 @@ namespace WaveOS.Apps
             TermWindow.height = 342;
             TermWindow.wndType = WINDOWTYPE.Normal;
             TermWindow.showed = true;
-            WaveConfigs.WindowMgr.winList.Add(TermWindow);
+            winmgr.winList.Add(TermWindow);
         }
 
         public void Controls()
@@ -41,14 +41,14 @@ namespace WaveOS.Apps
 
         public void KeyHandler()
         {
-            if (WaveConfigs.WindowMgr.winList[WaveConfigs.WindowMgr.winList.Count - 1].currentKey.Key != Cosmos.System.ConsoleKeyEx.Backspace ||
-                WaveConfigs.WindowMgr.winList[WaveConfigs.WindowMgr.winList.Count - 1].currentKey.Key != Cosmos.System.ConsoleKeyEx.Enter)
+            if (winmgr.winList[winmgr.winList.Count - 1].currentKey.Key != Cosmos.System.ConsoleKeyEx.Backspace ||
+                winmgr.winList[winmgr.winList.Count - 1].currentKey.Key != Cosmos.System.ConsoleKeyEx.Enter)
             {
-                currentCommand += WaveConfigs.WindowMgr.winList[WaveConfigs.WindowMgr.winList.Count - 1].currentKey.KeyChar;
-                WaveBuffer += WaveConfigs.WindowMgr.winList[WaveConfigs.WindowMgr.winList.Count - 1].currentKey.KeyChar;
+                currentCommand += winmgr.winList[winmgr.winList.Count - 1].currentKey.KeyChar;
+                WaveBuffer += winmgr.winList[winmgr.winList.Count - 1].currentKey.KeyChar;
             } else
             {
-                switch (WaveConfigs.WindowMgr.winList[WaveConfigs.WindowMgr.winList.Count - 1].currentKey.Key)
+                switch (winmgr.winList[winmgr.winList.Count - 1].currentKey.Key)
                 {
                     case Cosmos.System.ConsoleKeyEx.Enter:
                         WaveBuffer = WSH.handleWSHCommand(currentCommand, WaveBuffer);

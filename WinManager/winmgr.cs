@@ -15,8 +15,8 @@ namespace WaveOS.WinManager
     }
     public class winmgr
     {
-        public List<window> winList = new();
-        public int currentFocussed = 0;
+        public static List<window> winList = new();
+        public int currentFocussed = winList.Count - 1;
         public bool activeWindowDragging = false;
         public bool activeWindowOnTop = false;
 
@@ -36,29 +36,41 @@ namespace WaveOS.WinManager
 
         public void update()
         {
-            if (!winList[winList.Count - 1].showed)
-                winList.Remove(winList[winList.Count - 1]);
-                moveWindowToFront(winList[winList.Count - 1]);
-            if (KeyboardManager.TryReadKey(out var key))
+            if (winList.Count > 0)
+            {
+                if (!winList[winList.Count - 1].showed)
+                {
+                    winList.Remove(winList[winList.Count - 1]);
+                    moveWindowToFront(winList[winList.Count - 1]);
+                }
+                currentFocussed = winList.Count - 1;
+                winList[currentFocussed].focussed = true;
+            }
+            if (KeyboardManager.TryReadKey(out var key) && winList.Count > 0)
             {
                 PassKeyToFocussedWindow(key);
             }
-            currentFocussed = winList.Count - 1;
-            winList[currentFocussed].focussed = true;
+
+            /*
             if (winList.Count < 0)
             {
                 ImprovedVBE._DrawACSIIString("Win: " + winList.Count, 10,10,ImprovedVBE.colourToNumber(255,255,255));
                 return;
             }
-            foreach (var win in winList)
-            {
-                win.render();
+            */
+
+            if (winList.Count > 0) {
+                foreach (var win in winList)
+                {
+                    win.render();
+                }
+                winList[currentFocussed].render();
             }
-            winList[currentFocussed].render();
         }
         
         public void moveWindowToFront(window win)
         {
+            if (!(winList.Count > 0)) { return; }
             winList[winList.Count - 1].focussed = false;
             if (winList.Contains(win))
             {
@@ -74,6 +86,7 @@ namespace WaveOS.WinManager
 
         public void PassKeyToFocussedWindow(KeyEvent key)
         {
+            if (!(winList.Count > 0)) { return; }
             winList[winList.Count - 1].sendKey(key);
         }
     }

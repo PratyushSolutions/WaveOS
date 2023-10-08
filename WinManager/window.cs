@@ -25,6 +25,7 @@ namespace WaveOS.WinManager
         public KeyEvent currentKey;
         public Bitmap logo;
         public bool msgBox = false;
+        public bool hidden = false;
 
         public int bR = WaveConfigs.cTheme.winBg.r;
         public int bG = WaveConfigs.cTheme.winBg.g;
@@ -57,7 +58,7 @@ namespace WaveOS.WinManager
                 bR = WaveConfigs.cTheme.winBg.r; bG = WaveConfigs.cTheme.winBg.g; bB = WaveConfigs.cTheme.winBg.b;
             }
 
-            if (showed)
+            if (showed && !hidden)
                 update();
 
             return;
@@ -168,7 +169,7 @@ namespace WaveOS.WinManager
                 WaveConfigs.WindowMgr.moveWindowToFront(this);
             } else if (MouseManager.X > x && MouseManager.X < x + width && MouseManager.Y > y && MouseManager.Y < y + height && MouseManager.MouseState == MouseState.Left
                 && wndType == WINDOWTYPE.FullyDraggable && !focussed && !WaveConfigs.WindowMgr.activeWindowDragging &&
-                !WaveConfigs.WindowMgr.checkBoundsWithFocussedWindow(this))
+                !WaveConfigs.WindowMgr.checkBoundsWithFocussedWindow(this) && !(MouseManager.X > winmgr.winList[winmgr.winList.Count - 1].x && MouseManager.X < winmgr.winList[winmgr.winList.Count - 1].x + winmgr.winList[winmgr.winList.Count - 1].width && MouseManager.Y > winmgr.winList[winmgr.winList.Count - 1].y && MouseManager.Y < winmgr.winList[winmgr.winList.Count - 1].y + winmgr.winList[winmgr.winList.Count - 1].height))
             {
                 WaveConfigs.WindowMgr.moveWindowToFront(this);
             }

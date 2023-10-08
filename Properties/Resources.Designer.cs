@@ -63,6 +63,26 @@ namespace WaveOS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] waveBoot1 {
+            get {
+                object obj = ResourceManager.GetObject("waveBoot1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] waveBoot2 {
+            get {
+                object obj = ResourceManager.GetObject("waveBoot2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] WaveOS {
             get {
                 object obj = ResourceManager.GetObject("WaveOS", resourceCulture);

@@ -30,6 +30,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Resources\waveBoot1.bmp" />
+      <None Remove="Resources\waveBoot2.bmp" />
       <None Remove="Resources\WaveOS.bmp" />
       <None Remove="Resources\WaveOS_background.bmp" />
       <None Remove="Resources\WaveOS_background_720.bmp" />
@@ -42,6 +44,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="Resources\waveBoot1.bmp" />
+      <EmbeddedResource Include="Resources\waveBoot2.bmp" />
       <EmbeddedResource Include="Resources\WaveOS.bmp" />
       <EmbeddedResource Include="Resources\WaveOS_background.bmp" />
       <EmbeddedResource Include="Resources\WaveOS_background_720.bmp" />

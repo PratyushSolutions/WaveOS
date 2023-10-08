@@ -6,7 +6,7 @@ using System.Text;
 using Sys = Cosmos.System;
 using Cosmos.Core.Memory;
 using WaveOS.WinManager;
-using System;
+using s = System;
 using Cosmos.System;
 using System.Threading;
 using WaveOS.Apps;
@@ -14,17 +14,21 @@ using WaveOS.WaveAPI;
 using Cosmos.HAL.Drivers.Video.SVGAII;
 using System.Collections;
 using WaveOS.SystemMenus;
+using System.Diagnostics;
+using System;
+using System.IO;
 
 namespace WaveOS
 {
     public class Kernel : Sys.Kernel
     {
         public static SVGAIICanvas display = new(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
-        //public VBECanvas display = new(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
+        //public static VGACanvas displayM = new(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
         public static Canvas displayM = FullScreenCanvas.GetFullScreenCanvas(new Mode(WaveConfigs.displayW, WaveConfigs.displayH, ColorDepth.ColorDepth32));
         public static string currentSignal = "NONE";
         public static int useCanvas = 1;
         public bool loggedIn = false;
+        public const bool debugMode = true;
         protected override void BeforeRun()
         {
             if (VMTools.IsVMWare || VMTools.IsVirtualBox)
@@ -34,12 +38,12 @@ namespace WaveOS
 
             try
             {
-                if (WaveConfigs.WaFs.Disks.Count > 0)
-                {
+                //if (WaveConfigs.WaFs.Disks.Count > 0)
+                //{
                     VFSManager.RegisterVFS(WaveConfigs.WaFs);
-                }
+                //}
             }
-            catch (Exception)
+            catch (s.Exception)
             {
                 //ImprovedVBE._DrawACSIIString("Didn't make FS!");
             }
@@ -69,8 +73,15 @@ namespace WaveOS
             WaveConfigs.cTheme = WaveConfigs.darkMode;
             WaveConfigs.logonThemeConfig = WaveConfigs.logTheme_Dark;
 
+
+            if (!debugMode)
+            {
+                WaveBoot newBooter = new();
+                useMode = newBooter.bootScreen();
+            } else { useMode = 2; }
+
         login:
-            if (!loggedIn)
+            if (!loggedIn && useMode == 2 && !debugMode)
             {
                 loggedIn = LogonScreen.showScreen();
                 if (Sys.MouseManager.X < 0)
@@ -103,13 +114,30 @@ namespace WaveOS
                 Heap.Collect();
                 goto login;
             }
-            window backHold = new(new(nothing), "SYS");
-            backHold.x = 0; backHold.y = 0;
-            backHold.width = topmenu.menuHeight / 2; backHold.height = topmenu.menuHeight / 2;
-            backHold.showed = true;
-            backHold.hidden = true;
-            backHold.wndType = WINDOWTYPE.FullyDraggable;
-            winmgr.winList.Add(backHold);
+            if (useMode == 2)
+            {
+                window backHold = new(new(nothing), "SYS");
+                backHold.x = 0; backHold.y = 0;
+                backHold.width = topmenu.menuHeight / 2; backHold.height = topmenu.menuHeight / 2;
+                backHold.showed = true;
+                backHold.hidden = true;
+                backHold.wndType = WINDOWTYPE.FullyDraggable;
+                winmgr.winList.Add(backHold);
+            }
+            else
+            {
+                display.Disable();
+                displayM.Disable();
+                s.Console.BackgroundColor = s.ConsoleColor.DarkBlue;
+                s.Console.Clear();
+                s.Console.WriteLine("Booting WaveOS Console!\nPress anything to continue.");
+                s.Console.ReadKey();
+                s.Console.BackgroundColor = ConsoleColor.Black;
+                s.Console.Clear();
+                s.Console.Write(WaveConfigs.osNameVersion);
+                s.Console.WriteLine(" Console Session started.");
+                s.Console.WriteLine("On " + DateTime.Now);
+            }
         }
         private int frameCounter = 0;
 
@@ -125,26 +153,56 @@ namespace WaveOS
         public static int LastS = -1;
         public static int Ticken = 0;
 
+        public static int useMode = 0;
+
         public static void Update()
         {
             if (LastS == -1)
             {
-                LastS = DateTime.UtcNow.Second;
+                LastS = s.DateTime.UtcNow.Second;
             }
-            if (DateTime.UtcNow.Second - LastS != 0)
+            if (s.DateTime.UtcNow.Second - LastS != 0)
             {
-                if (DateTime.UtcNow.Second > LastS)
+                if (s.DateTime.UtcNow.Second > LastS)
                 {
-                    FPS = Ticken / (DateTime.UtcNow.Second - LastS);
+                    FPS = Ticken / (s.DateTime.UtcNow.Second - LastS);
                     WaveConfigs.timer++;
                 }
-                LastS = DateTime.UtcNow.Second;
+                LastS = s.DateTime.UtcNow.Second;
                 Ticken = 0;
             }
             Ticken++;
         }
 
         protected override void Run()
+        {
+            if (useMode == 1)
+            {
+                console();
+            } else
+            {
+                gui();
+            }
+        }
+
+        public static void console()
+        {
+            redo:
+            s.Console.Write("wave::> ");
+            var ln = s.Console.ReadLine();
+            if (ln == "startw")
+            {
+                //start wavegui
+                WaveConfigs.WaFs.CreateFile("0:\\BOOTTOGUI.signal");
+                Power.Reboot();
+            } else if (ln == "shutdown")
+            {
+                Power.Shutdown();
+            }
+            goto redo;
+        }
+
+        public static void gui()
         {
             Update();
             //winmgr
@@ -164,7 +222,8 @@ namespace WaveOS
             if (Sys.MouseManager.X < 0)
             {
                 Sys.MouseManager.X = 0;
-            } else if (Sys.MouseManager.X + WaveConfigs.currentCursor.Width > WaveConfigs.displayW)
+            }
+            else if (Sys.MouseManager.X + WaveConfigs.currentCursor.Width > WaveConfigs.displayW)
             {
                 Sys.MouseManager.X = WaveConfigs.displayW - WaveConfigs.currentCursor.Width;
             }
@@ -185,7 +244,8 @@ namespace WaveOS
             {
                 ImprovedVBE.display(displayM);
                 displayM.Display();
-            } else
+            }
+            else
             {
                 ImprovedVBE.display(display);
                 display.Display();
@@ -227,7 +287,8 @@ namespace WaveOS
                 display.Display();
                 Thread.Sleep(1000);
                 Power.Shutdown();
-            } else if (currentSignal == "WAIT5-REBOOT")
+            }
+            else if (currentSignal == "WAIT5-REBOOT")
             {
                 ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(10, 10, 10), 0, 0, WaveConfigs.displayW - 1, WaveConfigs.displayH - 1);
                 ImprovedVBE._DrawACSIIString("Rebooting the wave!", 5, 5, ImprovedVBE.colourToNumber(201, 28, 28));

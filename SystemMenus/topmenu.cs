@@ -26,7 +26,7 @@ namespace WaveOS.SystemMenus
         public TColor_Gray menuColor = new();
 
         public TColor_Gray waveOSMenu_Fore = new();
-        public TColor_Gray waveOSMenu_Back = new();
+        public TColor waveOSMenu_Back = new();
 
         public TColor_Gray waveOSMenu__Shutdown_Fore = new();
         public TColor_Gray waveOSMenu__Shutdown_Back = new();
@@ -42,7 +42,9 @@ namespace WaveOS.SystemMenus
             menuColor.c = WaveConfigs.cTheme.gMBg.r;
 
 
-            waveOSMenu_Back.c = WaveConfigs.cTheme.gMI_Bg.r;
+            waveOSMenu_Back.r = WaveConfigs.cTheme.gMBg.r;
+            waveOSMenu_Back.g = WaveConfigs.cTheme.gMBg.g;
+            waveOSMenu_Back.b = WaveConfigs.cTheme.gMBg.b;
             waveOSMenu_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
 
             waveOSMenu__Shutdown_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
@@ -59,7 +61,7 @@ namespace WaveOS.SystemMenus
 
         public void show()
         {
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(menuColor.c, menuColor.c, menuColor.c), 0, 0, WaveConfigs.displayW, menuHeight);
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(WaveConfigs.cTheme.gMBg.r, WaveConfigs.cTheme.gMBg.g, WaveConfigs.cTheme.gMBg.b), 0, 0, WaveConfigs.displayW, menuHeight);
 
             if (toggledMenu_WaveOSMenu)
             {
@@ -67,25 +69,29 @@ namespace WaveOS.SystemMenus
                 //currentColor_WaveOSMenu_ForeG = menuG;
                 //currentColor_WaveOSMenu_ForeB = menuB;
 
-                waveOSMenu_Back.c = WaveConfigs.cTheme.gMI_Bg.r;
+                waveOSMenu_Back.r = WaveConfigs.cTheme.gMI_Bg.r;
+                waveOSMenu_Back.g = WaveConfigs.cTheme.gMI_Bg.g;
+                waveOSMenu_Back.b = WaveConfigs.cTheme.gMI_Bg.b;
             } else
             {
                 waveOSMenu_Fore.c = WaveConfigs.cTheme.gMI_Fo.r;
-                waveOSMenu_Back.c = menuColor.c;
+                waveOSMenu_Back.r = WaveConfigs.cTheme.gMBg.r;
+                waveOSMenu_Back.g = WaveConfigs.cTheme.gMBg.g;
+                waveOSMenu_Back.b = WaveConfigs.cTheme.gMBg.b;
             }
 
             //global menu
 
             //--WaveOS permanent menu
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(waveOSMenu_Back.c), 15, menuHeight / 2, menuHeight / 2 + 1);
-            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(waveOSMenu_Back.c), 15 + 45, menuHeight / 2, menuHeight / 2);
-            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(waveOSMenu_Back.c), 20, 0, 45, menuHeight);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(waveOSMenu_Back.r, waveOSMenu_Back.g, waveOSMenu_Back.b), 15, menuHeight / 2, menuHeight / 2);
+            ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(waveOSMenu_Back.r, waveOSMenu_Back.g, waveOSMenu_Back.b), 15 + 45, menuHeight / 2, menuHeight / 2);
+            ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(waveOSMenu_Back.r, waveOSMenu_Back.g, waveOSMenu_Back.b), 20, 0, 45, menuHeight);
             //ImprovedVBE.DrawImageAlpha(WaveConfigs.waveTopBar, 0, 0);
             ImprovedVBE._DrawACSIIString("WaveOS", 15, 5, ImprovedVBE.colourToNumber(waveOSMenu_Fore.c));
             if (toggledMenu_WaveOSMenu)
             {
                 //ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(0, 0, 0), 7, 5 + 9 + 5 + 2, 45, 2); //draw underline bar
-                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(waveOSMenu_Back.c), 0, menuHeight, 100, 100);
+                ImprovedVBE.DrawFilledRectangle(ImprovedVBE.colourToNumber(waveOSMenu_Back.r, waveOSMenu_Back.g, waveOSMenu_Back.b), 0, menuHeight, 100, 100);
 
                 //--WaveOS permanent menu --> shutdown button
                 ImprovedVBE.DrawFilledCircle(ImprovedVBE.colourToNumber(waveOSMenu__Shutdown_Back.c), 10, menuHeight + 2 + 10, menuHeight / 2);
@@ -166,11 +172,15 @@ namespace WaveOS.SystemMenus
             {
                 toggledMenu_WaveOSMenu = !toggledMenu_WaveOSMenu;
                 MouseManager.MouseState = MouseState.None;
-            } else if (MouseManager.X >= 0 && MouseManager.X < 60 && MouseManager.Y >= 0 && MouseManager.Y < menuHeight)
+            }
+            /*
+            else if (MouseManager.X >= 0 && MouseManager.X < 60 && MouseManager.Y >= 0 && MouseManager.Y < menuHeight)
             {
                 MouseManager.MouseState = MouseState.None;
-                waveOSMenu_Back.c = 140;
+                waveOSMenu_Back.r = 140;
+                waveOSMenu_Back.g = 140;
             }
+            */
         }
     }
 }

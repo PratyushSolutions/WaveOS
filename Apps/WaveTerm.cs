@@ -20,6 +20,8 @@ namespace WaveOS.Apps
         public static string WaveBuffer = "# ";
         public static string currentCommand = "";
 
+        public int columns = 61;
+
         public WaveTerm()
         {
             TermWindow = new(Controls, "WaveTerm", KeyHandler, waveTermLogo);
@@ -34,7 +36,12 @@ namespace WaveOS.Apps
 
         public void Controls()
         {
-            Label sample = new(TermWindow, 1, 1, WaveBuffer, 255, 255, 255);
+            var text = "";
+            for (var i = 0; i < 22; i++)
+            {
+                text += i + "\n";
+            }
+            Label sample = new(TermWindow, 1, 1, text, 255, 255, 255);
 
             sample.draw();
         }
